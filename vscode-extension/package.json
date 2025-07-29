@@ -1,0 +1,32 @@
+{
+  "name": "mcp-autonomous-dev-vscode",
+  "displayName": "MCP Autonomous Development",
+  "description": "VS Code extension for the MCP Autonomous Development System",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "activationEvents": [
+    "onCommand:mcp-autonomous-dev.startSession"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "mcp-autonomous-dev.startSession",
+        "title": "MCP: Start Auto-Continue Session"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.80.0",
+    "@types/glob": "^8.0.0",
+    "typescript": "^5.0.0",
+    "glob": "^8.0.0"
+  }
+}

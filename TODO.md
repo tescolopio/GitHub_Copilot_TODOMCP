@@ -75,19 +75,19 @@ This project implements an MCP (Model Context Protocol) server that enables auto
 
 ### 3. Basic Auto-Continue Service
 
-- [ ] **Core Service Class**
-  - [ ] Create `src/services/AutoContinueService.ts`
-  - [ ] Implement basic TODO → Action → Execute loop
-  - [ ] Add action counter and basic rate limiting (max 5 actions per session)
-  - [ ] Simple pattern matching for "safe" TODOs:
+- [x] **Core Service Class**
+  - [x] Create `src/services/AutoContinueService.ts`
+  - [x] Implement basic TODO → Action → Execute loop
+  - [x] Add action counter and basic rate limiting (max 5 actions per session)
+  - [x] Simple pattern matching for "safe" TODOs:
     - Documentation updates
     - Simple formatting fixes
     - Adding basic comments
     - Renaming variables (simple cases)
 
-- [ ] **Safe Pattern Recognition**
-  - [ ] Create `src/patterns/SafePatterns.ts`
-  - [ ] Define regex patterns for auto-approvable changes:
+- [x] **Safe Pattern Recognition**
+  - [x] Create `src/patterns/SafePatterns.ts`
+  - [x] Define regex patterns for auto-approvable changes:
 
     ```typescript
     const SAFE_PATTERNS = [
@@ -98,37 +98,37 @@ This project implements an MCP (Model Context Protocol) server that enables auto
     ];
     ```
 
-  - [ ] Implement confidence scoring system (0-1 scale)
-  - [ ] Add pattern validation and testing
+  - [x] Implement confidence scoring system (0-1 scale)
+  - [x] Add pattern validation and testing
 
 ### 4. Basic State Persistence
 
-- [ ] **Session Storage**
-  - [ ] Create `src/storage/SessionStorage.ts`
-  - [ ] Implement JSON file-based storage in `.mcp-sessions/`
-  - [ ] Store session metadata:
+- [x] **Session Storage**
+  - [x] Create `src/storage/SessionStorage.ts`
+  - [x] Implement JSON file-based storage in `.mcp-sessions/`
+  - [x] Store session metadata:
     - Session ID, timestamp, workspace path
     - Action history with status
     - Current state and counters
-  - [ ] Add session cleanup (remove old sessions)
+  - [x] Add session cleanup (remove old sessions)
 
-- [ ] **Action History**
-  - [ ] Create `src/models/Action.ts` interface
-  - [ ] Track all actions with timestamps and outcomes
-  - [ ] Store file checksums before/after changes
+- [x] **Action History**
+  - [x] Create `src/models/Action.ts` interface
+  - [x] Track all actions with timestamps and outcomes
+  - [x] Store file checksums before/after changes
   - [ ] Enable basic action replay for debugging
 
 ### 5. Minimal VS Code Extension
 
-- [ ] **Extension Setup**
-  - [ ] Create `vscode-extension/` folder with extension manifest
-  - [ ] Set up TypeScript build for extension
+- [x] **Extension Setup**
+  - [x] Create `vscode-extension/` folder with extension manifest
+  - [x] Set up TypeScript build for extension
   - [ ] Configure MCP server connection
-  - [ ] Add activation events for relevant file types
+  - [x] Add activation events for relevant file types
 
-- [ ] **Basic UI Components**
-  - [ ] Status bar item showing MCP connection status
-  - [ ] Command palette commands:
+- [x] **Basic UI Components**
+  - [x] Status bar item showing MCP connection status
+  - [x] Command palette commands:
     - "Start Auto-Continue Session"
     - "Stop Auto-Continue Session"
     - "Show Session History"

@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import path from 'path';
-import { createLogger } from '../utils/logger.js';
+import { createLogger } from '../utils/logger';
 
 const logger = createLogger('ConfigManager');
 

@@ -1,7 +1,7 @@
 import { exec } from 'child_process';
 import { promisify } from 'util';
 import path from 'path';
-import { createLogger } from '../utils/logger.js';
+import { createLogger } from '../utils/logger';
 
 const execAsync = promisify(exec);
 const logger = createLogger('GitTools');
@@ -17,16 +17,19 @@ export interface GitStatus {
 }
 
 export class GitTools {
-  async getGitStatus(args: {
-    workspacePath: string;
-  }): Promise<{ content: Array<{ type: 'text'; text: string }> }> {
+  private workspacePath: string;
+
+  constructor(workspacePath: string) {
+    this.workspacePath = workspacePath;
+  }
+
+  async getGitStatus(): Promise<{ content: Array<{ type: 'text'; text: string }> }> {
     try {
-      const { workspacePath } = args;
-      logger.info(`Getting Git status for ${workspacePath}`);
+      logger.info(`Getting Git status for ${this.workspacePath}`);
 
       // Check if it's a git repository
       try {
-        await execAsync('git rev-parse --git-dir', { cwd: workspacePath });
+        await execAsync('git rev-parse --git-dir', { cwd: this.workspacePath });
       } catch {
         return {
           content: [
@@ -40,13 +43,13 @@ export class GitTools {
 
       // Get current branch
       const { stdout: branchOutput } = await execAsync('git branch --show-current', {
-        cwd: workspacePath,
+        cwd: this.workspacePath,
       });
       const branch = branchOutput.trim();
 
       // Get status
       const { stdout: statusOutput } = await execAsync('git status --porcelain', {
-        cwd: workspacePath,
+        cwd: this.workspacePath,
       });
 
       const staged: string[] = [];
@@ -76,7 +79,7 @@ export class GitTools {
       try {
         const { stdout: upstreamOutput } = await execAsync(
           `git rev-list --count --left-right @{u}...HEAD`,
-          { cwd: workspacePath }
+          { cwd: this.workspacePath }
         );
         const [behindStr, aheadStr] = upstreamOutput.trim().split('\t');
         behind = parseInt(behindStr || '0', 10) || 0;
@@ -87,7 +90,7 @@ export class GitTools {
 
       const hasChanges = staged.length > 0 || unstaged.length > 0 || untracked.length > 0;
 
-      const result = `📊 Git Status for ${path.basename(workspacePath)}\n` +
+      const result = `📊 Git Status for ${path.basename(this.workspacePath)}\n` +
         `${'='.repeat(50)}\n` +
         `🌿 Branch: ${branch}\n` +
         `📡 Remote: ${ahead > 0 ? `${ahead} ahead` : ''}${behind > 0 ? ` ${behind} behind` : ''}\n` +

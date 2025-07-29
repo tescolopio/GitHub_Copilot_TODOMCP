@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
 import path from 'path';
 import glob from 'glob';
-import { createLogger } from '../utils/logger.js';
+import { createLogger } from '../utils/logger';
 
 const logger = createLogger('FileSystemTools');
 
@@ -33,7 +33,7 @@ export class FileSystemTools {
   async listTodos(args: {
     workspacePath: string;
     filePatterns?: string[];
-  }): Promise<{ content: Array<{ type: 'text'; text: string }> }> {
+  }): Promise<TodoItem[]> {
     try {
       const { workspacePath, filePatterns = ['**/*.{ts,js,py,java,cpp,c,h,md}'] } = args;
       logger.info(`Scanning for TODOs in ${workspacePath}`);
@@ -53,20 +53,10 @@ export class FileSystemTools {
         }
       }
 
-      const summary = `Found ${todos.length} TODO items across ${filePatterns.length} file patterns.\n\n` +
-        todos.map((todo, index) => 
-          `${index + 1}. [${todo.type}] ${path.relative(workspacePath, todo.filePath)}:${todo.line}\n` +
-          `   ${todo.content.trim()}\n`
-        ).join('\n');
+      const summary = `Found ${todos.length} TODO items.`;
+      logger.info(summary);
 
-      return {
-        content: [
-          {
-            type: 'text',
-            text: summary,
-          },
-        ],
-      };
+      return todos;
     } catch (error) {
       logger.error('Error listing TODOs:', error);
       throw error;

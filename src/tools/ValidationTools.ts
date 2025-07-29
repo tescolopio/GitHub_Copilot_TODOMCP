@@ -2,7 +2,7 @@ import fs from 'fs-extra';
 import { exec } from 'child_process';
 import { promisify } from 'util';
 import path from 'path';
-import { createLogger } from '../utils/logger.js';
+import { createLogger } from '../utils/logger';
 
 const execAsync = promisify(exec);
 const logger = createLogger('ValidationTools');
@@ -36,7 +36,7 @@ export class ValidationTools {
   async validateSyntax(args: {
     filePath: string;
     content?: string;
-  }): Promise<{ content: Array<{ type: 'text'; text: string }> }> {
+  }): Promise<SyntaxValidationResult> {
     try {
       const { filePath, content } = args;
       logger.info(`Validating syntax for ${filePath}`);
@@ -66,25 +66,7 @@ export class ValidationTools {
           break;
       }
 
-      const result = `🔍 Syntax Validation for ${path.basename(filePath)}\n` +
-        `${'='.repeat(50)}\n` +
-        `Status: ${validationResult.isValid ? '✅ Valid' : '❌ Invalid'}\n` +
-        `Errors: ${validationResult.errors.length}\n` +
-        `\n` +
-        (validationResult.errors.length > 0 
-          ? `🚨 Issues found:\n${validationResult.errors.map(err => 
-              `  ${err.severity === 'error' ? '❌' : '⚠️'} Line ${err.line}:${err.column} - ${err.message}`
-            ).join('\n')}\n`
-          : '✨ No syntax errors found!\n');
-
-      return {
-        content: [
-          {
-            type: 'text',
-            text: result,
-          },
-        ],
-      };
+      return validationResult;
     } catch (error) {
       logger.error('Error validating syntax:', error);
       throw error;
