@@ -71,7 +71,7 @@ This project implements an MCP (Model Context Protocol) server that enables auto
 - [x] **Validation Tools**
   - [x] `validateSyntax` - Check code syntax before applying changes
   - [x] `runTests` - Execute test suites (detect test framework)
-  - [ ] `checkBuild` - Verify project still compiles
+  - [x] `checkBuild` - Verify project still compiles
 
 ### 3. Basic Auto-Continue Service
 

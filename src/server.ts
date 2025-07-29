@@ -192,6 +192,24 @@ class MCPAutonomousDevServer {
             required: ['workspacePath'],
           },
         },
+        {
+          name: 'checkBuild',
+          description: 'Verify project compiles and builds successfully',
+          inputSchema: {
+            type: 'object',
+            properties: {
+              workspacePath: {
+                type: 'string',
+                description: 'Path to the workspace',
+              },
+              buildCommand: {
+                type: 'string',
+                description: 'Custom build command (optional, will auto-detect if not provided)',
+              },
+            },
+            required: ['workspacePath'],
+          },
+        },
       ];
 
       return { tools };
@@ -248,6 +266,12 @@ class MCPAutonomousDevServer {
             return await this.state.validationTools.runTests(args as {
               workspacePath: string;
               testPattern?: string;
+            });
+
+          case 'checkBuild':
+            return await this.state.validationTools.checkBuild(args as {
+              workspacePath: string;
+              buildCommand?: string;
             });
 
           default:

@@ -378,4 +378,114 @@ export class ValidationTools {
       duration,
     };
   }
+
+  async checkBuild(args: {
+    workspacePath: string;
+    buildCommand?: string;
+  }): Promise<{ content: Array<{ type: 'text'; text: string }> }> {
+    try {
+      const { workspacePath, buildCommand } = args;
+      logger.info(`Checking build for ${workspacePath}`);
+
+      const buildCmd = buildCommand || await this.detectBuildCommand(workspacePath);
+      
+      if (!buildCmd) {
+        return {
+          content: [
+            {
+              type: 'text',
+              text: '⚠️ No build command detected. Please specify a build command or ensure package.json has a build script.',
+            },
+          ],
+        };
+      }
+
+      const startTime = Date.now();
+      
+      try {
+        const { stdout, stderr } = await execAsync(buildCmd, { 
+          cwd: workspacePath,
+          timeout: 60000 // 60 second timeout for builds
+        });
+
+        const duration = Date.now() - startTime;
+        
+        const result = `🏗️ Build Check Results\n` +
+          `${'='.repeat(50)}\n` +
+          `Command: ${buildCmd}\n` +
+          `Status: ✅ Success\n` +
+          `Duration: ${duration}ms\n` +
+          `\n` +
+          `📤 Output:\n${stdout}\n` +
+          (stderr ? `⚠️ Warnings/Errors:\n${stderr}\n` : '');
+
+        return {
+          content: [
+            {
+              type: 'text',
+              text: result,
+            },
+          ],
+        };
+      } catch (buildError: any) {
+        const duration = Date.now() - startTime;
+        
+        const result = `🏗️ Build Check Results\n` +
+          `${'='.repeat(50)}\n` +
+          `Command: ${buildCmd}\n` +
+          `Status: ❌ Failed\n` +
+          `Duration: ${duration}ms\n` +
+          `\n` +
+          `💥 Error Output:\n${buildError.stdout || ''}\n${buildError.stderr || ''}\n` +
+          `\n` +
+          `🚨 Build failed! Please fix the compilation errors before proceeding.`;
+
+        return {
+          content: [
+            {
+              type: 'text',
+              text: result,
+            },
+          ],
+        };
+      }
+    } catch (error) {
+      logger.error('Error checking build:', error);
+      throw error;
+    }
+  }
+
+  private async detectBuildCommand(workspacePath: string): Promise<string | null> {
+    const packageJsonPath = path.join(workspacePath, 'package.json');
+    
+    if (await fs.pathExists(packageJsonPath)) {
+      const packageJson = await fs.readJson(packageJsonPath);
+      const scripts = packageJson.scripts || {};
+      
+      // Check for common build script names
+      if (scripts.build) return 'npm run build';
+      if (scripts.compile) return 'npm run compile';
+      if (scripts.tsc) return 'npm run tsc';
+      
+      // Check for TypeScript project
+      if (await fs.pathExists(path.join(workspacePath, 'tsconfig.json'))) {
+        return 'npx tsc';
+      }
+    }
+
+    // Check for other build systems
+    if (await fs.pathExists(path.join(workspacePath, 'Makefile'))) {
+      return 'make';
+    }
+    
+    if (await fs.pathExists(path.join(workspacePath, 'build.gradle'))) {
+      return './gradlew build';
+    }
+    
+    if (await fs.pathExists(path.join(workspacePath, 'pom.xml'))) {
+      return 'mvn compile';
+    }
+
+    return null;
+  }
 }
