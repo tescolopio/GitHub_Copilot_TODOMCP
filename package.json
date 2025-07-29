@@ -14,7 +14,12 @@
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
     "format": "prettier --write src/**/*.ts",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "docker:build": "docker build -t mcp-todo-management .",
+    "docker:run": "docker run -d -p 3000:3000 --name mcp-todo-server mcp-todo-management",
+    "docker:stop": "docker stop mcp-todo-server && docker rm mcp-todo-server",
+    "package": "npm run build && npm pack",
+    "prepare": "npm run build"
   },
   "keywords": [
     "mcp",

@@ -1,3 +1,4 @@
+# Name for the workflow
 name: Security Checks
 
 on:
@@ -10,17 +11,21 @@ on:
     - cron: "0 2 * * *"
 
 jobs:
+  # This job audits dependencies for known vulnerabilities
   audit:
-    name: NPM Audit
+    name: Dependency Audit
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v2
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4 # Use the latest version
         with:
           version: 8
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "pnpm"
@@ -28,37 +33,46 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # Runs the audit. Fails on moderate or higher vulnerabilities but continues the job.
       - name: Run security audit
         run: pnpm audit --audit-level=moderate
         continue-on-error: true
 
-      - name: Create audit report
+      # This step runs only if the audit step above failed.
+      - name: Create audit report on failure
         if: failure()
         run: pnpm audit --json > audit-report.json
 
+      # This step uploads the report artifact only if the audit step failed.
       - name: Upload audit results
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4 # Use the latest version
         with:
           name: npm-audit-report
           path: audit-report.json
+          retention-days: 7
 
+  # This job scans the repository for any hardcoded secrets
   secrets-scan:
     name: Secrets Scanning
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Fetch all history for scanning
+          fetch-depth: 0 # Fetch all history for a full scan
 
+      # Scans for secrets. The parameters are adjusted based on the event type.
       - name: TruffleHog Secret Scan
-        uses: trufflesecurity/trufflehog@v3.63.7
+        uses: trufflesecurity/trufflehog@v3 # Use the latest major version
         with:
+          # For pull requests, scan only the changes. For other events, scan the whole repo.
           path: ./
-          base: ${{ github.event.repository.default_branch }}
-          head: HEAD
-          extra_args: --debug --only-verified
+          base: ${{ github.event_name == 'pull_request' && github.base_ref || '' }}
+          head: ${{ github.event_name == 'pull_request' && github.head_ref || '' }}
+          extra_args: --only-verified
 
+  # This job performs static code analysis using GitHub's CodeQL
   codeql:
     name: CodeQL Analysis
     runs-on: ubuntu-latest
@@ -76,16 +90,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Initializes the CodeQL tools for the specified language
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
+        uses: github/codeql-action/init@v3 # Use the latest version
         with:
           languages: ${{ matrix.language }}
+          # Using a combined set of queries for broad security coverage
           queries: security-extended,security-and-quality
 
       - name: Autobuild
-        uses: github/codeql-action/autobuild@v2
+        uses: github/codeql-action/autobuild@v3 # Use the latest version
 
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
+        uses: github/codeql-action/analyze@v3 # Use the latest version
         with:
           category: "/language:${{matrix.language}}"

@@ -1,28 +1,38 @@
+# Name for the workflow
 name: Release
 
+# This workflow runs when a new tag starting with 'v' is pushed
 on:
   push:
     tags:
       - "v*"
 
+# Permissions required for the jobs in this workflow
 permissions:
-  contents: write
-  packages: write
+  contents: write # Required to create a GitHub Release
+  packages: write # Required to publish a package to GitHub Container Registry (ghcr.io)
 
 jobs:
+  # This job creates the GitHub Release and generates a changelog
   release:
-    name: Create Release
+    name: Create GitHub Release
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      # Checks out the repository code. fetch-depth: 0 is required to get all history for changelog generation.
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - uses: pnpm/action-setup@v2
+      # Sets up pnpm package manager
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4 # Use the latest version
         with:
           version: 8
 
-      - uses: actions/setup-node@v4
+      # Sets up Node.js environment and caches pnpm dependencies
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "pnpm"
@@ -36,38 +46,45 @@ jobs:
       - name: Run tests
         run: pnpm test
 
+      # Generates a changelog from conventional commit messages
       - name: Create changelog
         id: changelog
-        uses: TriPSs/conventional-changelog-action@v4
+        uses: TriPSs/conventional-changelog-action@v5 # Use the latest version
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          skip-version-file: true
-          output-file: false
+          skip-version-file: true # We are using the tag as the version
+          output-file: false # We will use the output directly
 
+      # Creates the official GitHub Release
       - name: Create Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2 # Use the latest version
         with:
+          # The body of the release will be the generated changelog
           body: ${{ steps.changelog.outputs.clean_changelog }}
+          # Attach build artifacts and other important files to the release
           files: |
             dist/**/*
             LICENSE
             README.md
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  # This job builds and pushes a Docker image to the GitHub Container Registry
   docker-release:
-    name: Docker Release
+    name: Build and Push Docker Image
     runs-on: ubuntu-latest
-    needs: release
+    needs: release # This job runs only after the 'release' job is successful
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
+      # Set up QEMU for multi-platform builds
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
+      # Set up Docker Buildx, the advanced builder
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      # Login to GitHub Container Registry
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
@@ -75,17 +92,18 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract metadata
+      # Extracts metadata (tags, labels) for the Docker image
+      - name: Extract Docker metadata
         id: meta
         uses: docker/metadata-action@v5
         with:
           images: ghcr.io/${{ github.repository }}
           tags: |
-            type=ref,event=tag
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
 
-      - name: Build and push
+      # Builds the Docker image and pushes it to the registry
+      - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .

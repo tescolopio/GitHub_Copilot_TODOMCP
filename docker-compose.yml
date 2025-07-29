@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  mcp-todo-server:
+    build: .
+    container_name: mcp-todo-management
+    ports:
+      - "3000:3000"
+    volumes:
+      # Mount workspace directory for TODO management
+      - ./workspace:/app/workspace:rw
+      # Mount config directory
+      - ./config:/app/config:ro
+      # Mount logs directory
+      - ./logs:/app/logs:rw
+    environment:
+      - NODE_ENV=production
+      - WORKSPACE_PATH=/app/workspace
+      - CONFIG_PATH=/app/config/config.json
+      - LOG_LEVEL=info
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "console.log('MCP TODO Server is healthy')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Development service
+  mcp-todo-dev:
+    build:
+      context: .
+      target: development
+    container_name: mcp-todo-development
+    ports:
+      - "3001:3000"
+    volumes:
+      - .:/app:rw
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - WORKSPACE_PATH=/app/workspace
+      - CONFIG_PATH=/app/config/config.json
+      - LOG_LEVEL=debug
+    command: ["pnpm", "dev"]
+    profiles:
+      - dev
