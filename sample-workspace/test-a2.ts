@@ -7,6 +7,7 @@ t
 t
 t
 t
+t
   // TODO: Add comment about this method functionality
   testMethod() {
     return 'test';
