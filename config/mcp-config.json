@@ -1,0 +1,48 @@
+{
+  "server": {
+    "name": "mcp-autonomous-dev",
+    "version": "1.0.0",
+    "maxActionsPerSession": 5,
+    "sessionTimeoutMinutes": 60
+  },
+  "patterns": {
+    "safePatterns": [
+      "TODO:?\\s*add\\s+comment",
+      "TODO:?\\s*fix\\s+formatting",
+      "TODO:?\\s*update\\s+documentation",
+      "TODO:?\\s*rename\\s+\\w+\\s+to\\s+\\w+"
+    ],
+    "confidenceThreshold": 0.8,
+    "fileExtensions": [
+      "ts",
+      "js",
+      "py",
+      "java",
+      "cpp",
+      "c",
+      "h",
+      "md"
+    ],
+    "excludePatterns": [
+      "node_modules/**",
+      "dist/**",
+      "*.min.js",
+      "*.bundle.js"
+    ]
+  },
+  "git": {
+    "autoCreateBranches": true,
+    "branchPrefix": "mcp-auto-",
+    "autoCommit": false
+  },
+  "validation": {
+    "enableSyntaxCheck": true,
+    "enableTestRunner": true,
+    "testTimeout": 30000
+  },
+  "storage": {
+    "sessionDirectory": ".mcp-sessions",
+    "maxSessionAge": 7,
+    "backupDirectory": ".mcp-backups"
+  }
+}

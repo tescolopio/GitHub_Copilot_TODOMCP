@@ -73,7 +73,7 @@ export class ConfigManager {
   private config: MCPConfig;
   private configPath: string;
 
-  constructor(configPath: string = 'mcp-config.json') {
+  constructor(configPath: string = 'config/mcp-config.json') {
     this.configPath = configPath;
     this.config = { ...DEFAULT_CONFIG };
   }

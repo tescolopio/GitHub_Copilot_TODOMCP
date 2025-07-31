@@ -44,6 +44,8 @@ export enum ActionType {
   RENAME_VARIABLE = 'rename_variable',
   IMPLEMENT_FUNCTION = 'implement_function',
   ADD_IMPORT = 'add_import',
+  REMOVE_UNUSED_IMPORTS = 'remove_unused_imports',
+  REMOVE_UNUSED_VARIABLES = 'remove_unused_variables',
   REMOVE_UNUSED_CODE = 'remove_unused_code',
 }
 

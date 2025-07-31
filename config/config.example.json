@@ -1,0 +1,28 @@
+{
+  "autoContinue": {
+    "enabled": false,
+    "maxConsecutiveActions": 10,
+    "strategy": "balanced"
+  },
+  "safety": {
+    "allowedPatterns": [
+      "Add comments",
+      "Fix formatting",
+      "Update imports"
+    ],
+    "blockedPatterns": [
+      "delete",
+      "remove",
+      "drop",
+      "rm -rf"
+    ]
+  },
+  "workspace": {
+    "excludePaths": [
+      "node_modules",
+      ".git",
+      "dist",
+      "coverage"
+    ]
+  }
+}

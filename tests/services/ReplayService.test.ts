@@ -103,9 +103,10 @@ describe('ReplayService', () => {
       const replaySession = await replayService.getReplaySession(sessionId);
       expect(replaySession).toBeTruthy();
       expect(replaySession!.steps).toHaveLength(1);
-      expect(replaySession!.steps[0].action.id).toBe('action-1');
-      expect(replaySession!.steps[0].fileStateBefore).toContain('TODO: Add function implementation');
-      expect(replaySession!.steps[0].fileStateAfter).toContain('Added implementation comment');
+      const step = replaySession!.steps[0]!;
+      expect(step.action.id).toBe('action-1');
+      expect(step.fileStateBefore).toContain('TODO: Add function implementation');
+      expect(step.fileStateAfter).toContain('Added implementation comment');
     });
 
     it('should provide detailed step debugging', async () => {
@@ -179,17 +180,18 @@ describe('ReplayService', () => {
       ];
 
       for (let i = 0; i < actions.length; i++) {
+        const currentAction = actions[i]!;
         const action: Action = {
           id: `action-${i + 1}`,
           sessionId,
-          type: actions[i].type,
-          status: actions[i].status,
-          description: actions[i].description,
+          type: currentAction.type,
+          status: currentAction.status,
+          description: currentAction.description,
           filePath: path.join(workspacePath, `test-${i}.ts`),
           lineNumber: 1,
           timestamp: new Date(),
           metadata: {
-            todoText: `TODO: ${actions[i].description}`,
+            todoText: `TODO: ${currentAction.description}`,
             patternId: 'test-pattern',
             confidence: 0.8,
             riskLevel: 'low',
@@ -200,8 +202,8 @@ describe('ReplayService', () => {
             startTime: new Date(),
             endTime: new Date(),
             duration: 1000,
-            output: actions[i].status === ActionStatus.COMPLETED ? 'Success' : '',
-            error: actions[i].status === ActionStatus.FAILED ? 'Test error' : '',
+            output: currentAction.status === ActionStatus.COMPLETED ? 'Success' : '',
+            error: currentAction.status === ActionStatus.FAILED ? 'Test error' : '',
           },
           changes: {
             filePath: path.join(workspacePath, `test-${i}.ts`),
@@ -211,7 +213,7 @@ describe('ReplayService', () => {
             id: `todo-${i + 1}`,
             filePath: path.join(workspacePath, `test-${i}.ts`),
             line: 1,
-            content: `TODO: ${actions[i].description}`,
+            content: `TODO: ${currentAction.description}`,
             confidence: 0.8,
           },
         };
@@ -225,9 +227,10 @@ describe('ReplayService', () => {
       const breakdown = await replayService.getStepBreakdown(sessionId);
       expect(breakdown).toBeTruthy();
       expect(breakdown!.breakdown).toHaveLength(3);
-      expect(breakdown!.breakdown[0].success).toBe(true);
-      expect(breakdown!.breakdown[1].success).toBe(true);
-      expect(breakdown!.breakdown[2].success).toBe(false);
+      const breakdownSteps = breakdown!.breakdown;
+      expect(breakdownSteps[0]!.success).toBe(true);
+      expect(breakdownSteps[1]!.success).toBe(true);
+      expect(breakdownSteps[2]!.success).toBe(false);
     });
 
     it('should cleanup old replay sessions', async () => {

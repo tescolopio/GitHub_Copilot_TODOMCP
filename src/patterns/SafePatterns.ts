@@ -74,16 +74,31 @@ export const SAFE_PATTERNS: SafePattern[] = [
   {
     id: 'rename-variable',
     name: 'Rename Variable',
-    description: 'Rename a variable to a more descriptive name',
+    description: 'Rename a variable to a more descriptive name using AST analysis',
     regex: /(?:TODO:?\s*)?rename\s+(?:variable\s+)?(\w+)\s+to\s+(\w+)/i,
     actionType: ActionType.RENAME_VARIABLE,
-    confidence: 0.75,
-    riskLevel: 'medium',
-    autoApprove: false, // Requires more careful analysis
+    confidence: 0.9, // Increased confidence due to AST-based safety
+    riskLevel: 'low', // Reduced risk level due to precise AST analysis
+    autoApprove: true, // Now safe to auto-approve with AST parsing
     extractGroups: ['oldName', 'newName'],
     contextRequirements: {
-      fileTypes: ['ts', 'js', 'py', 'java', 'cpp', 'c'],
-      maxComplexity: 50, // Don't rename in highly complex functions
+      fileTypes: ['ts', 'js', 'tsx', 'jsx'], // Limited to files we can parse
+      maxComplexity: 100, // Increased limit due to better safety
+    },
+  },
+  {
+    id: 'implement-function',
+    name: 'Implement Function',
+    description: 'Generate implementation for function stubs or empty functions',
+    regex: /(?:TODO:?\s*)?(?:implement(?:\s+function)?|generate\s+implementation|create\s+function)\s*(?:for\s+)?(?:function\s+)?(.+?)(?:\s+function)?/i,
+    actionType: ActionType.IMPLEMENT_FUNCTION,
+    confidence: 0.8,
+    riskLevel: 'medium',
+    autoApprove: false, // Start with manual approval to verify generated code
+    extractGroups: ['functionName'],
+    contextRequirements: {
+      fileTypes: ['ts', 'js', 'tsx', 'jsx'],
+      maxComplexity: 50, // Lower limit for function implementation
     },
   },
   {
@@ -101,15 +116,30 @@ export const SAFE_PATTERNS: SafePattern[] = [
     },
   },
   {
-    id: 'implement-function',
-    name: 'Implement Function',
-    description: 'Implement a function stub',
-    regex: /(?:TODO:?\s*)?implement(?:\s+(?:function|method))?\s+(.+)/i,
-    actionType: ActionType.IMPLEMENT_FUNCTION,
-    confidence: 0.6,
-    riskLevel: 'high',
-    autoApprove: false,
-    extractGroups: ['functionName'],
+    id: 'remove-unused-imports',
+    name: 'Remove Unused Imports',
+    description: 'Remove import statements that are not used in the file',
+    regex: /(?:TODO:?\s*)?(?:remove|clean|delete|clear)\s+(?:unused\s+)?imports?/i,
+    actionType: ActionType.REMOVE_UNUSED_IMPORTS,
+    confidence: 0.85,
+    riskLevel: 'low',
+    autoApprove: true,
+    contextRequirements: {
+      fileTypes: ['ts', 'tsx', 'js', 'jsx'],
+    },
+  },
+  {
+    id: 'remove-unused-variables',
+    name: 'Remove Unused Variables',
+    description: 'Remove variable declarations that are not used in the file',
+    regex: /(?:TODO:?\s*)?(?:remove|clean|delete|clear)\s+(?:unused\s+)?(?:variables?|vars?)/i,
+    actionType: ActionType.REMOVE_UNUSED_VARIABLES,
+    confidence: 0.8,
+    riskLevel: 'low',
+    autoApprove: true,
+    contextRequirements: {
+      fileTypes: ['ts', 'tsx', 'js', 'jsx'],
+    },
   },
 ];
 

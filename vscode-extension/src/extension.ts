@@ -41,7 +41,13 @@ export function activate(context: vscode.ExtensionContext) {
 
     const startSessionCommand = vscode.commands.registerCommand('todo-mcp.startSession', async () => {
         try {
-            await client.sendRequest('startSession');
+            const workspaceFolders = vscode.workspace.workspaceFolders;
+            if (!workspaceFolders) {
+                vscode.window.showErrorMessage('No workspace folder open.');
+                return;
+            }
+            const workspacePath = workspaceFolders[0].uri.fsPath;
+            await client.sendRequest('startAutoContinue', { workspacePath });
             vscode.window.showInformationMessage('Auto-Continue Session Started');
             updateStatusBarItem('running');
         } catch (error: any) {
@@ -52,7 +58,11 @@ export function activate(context: vscode.ExtensionContext) {
 
     const stopSessionCommand = vscode.commands.registerCommand('todo-mcp.stopSession', async () => {
         try {
-            await client.sendRequest('stopSession');
+            // Assuming the session ID is managed by the extension
+            // For now, let's assume we need to get it from somewhere, e.g., a stored state.
+            // This part needs a proper implementation to track the active session ID.
+            const sessionId = "some-active-session-id"; // Placeholder
+            await client.sendRequest('stopAutoContinue', { sessionId });
             vscode.window.showInformationMessage('Auto-Continue Session Stopped');
             updateStatusBarItem('idle');
         } catch (error: any) {

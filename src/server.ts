@@ -14,6 +14,7 @@ import { GitTools } from './tools/GitTools.js';
 import { ValidationTools } from './tools/ValidationTools.js';
 import { DebugTools } from './tools/DebugTools.js';
 import { AutoContinueService } from './services/AutoContinueService.js';
+import { getAutoContinueTools, handleAutoContinueTools } from './tools/AutoContinueTools.js';
 
 const logger = createLogger('MCPServer');
 
@@ -23,7 +24,7 @@ interface ServerState {
   gitTools: GitTools;
   validationTools: ValidationTools;
   debugTools: DebugTools;
-  autoContinueService?: AutoContinueService;
+  autoContinueService: AutoContinueService;
 }
 
 class MCPAutonomousDevServer {
@@ -44,13 +45,24 @@ class MCPAutonomousDevServer {
     );
 
     // Initialize state
+    const fileSystemTools = new FileSystemTools();
+    const gitTools = new GitTools(process.cwd());
+    const validationTools = new ValidationTools();
+    const autoContinueService = new AutoContinueService(
+      fileSystemTools,
+      gitTools,
+      validationTools,
+      process.cwd()
+    );
+
     this.state = {
       configManager: new ConfigManager(),
-      fileSystemTools: new FileSystemTools(),
-      gitTools: new GitTools(process.cwd()),
-      validationTools: new ValidationTools(),
-      debugTools: new DebugTools({ 
-        replayService: null as any // Will be initialized later when AutoContinueService is created
+      fileSystemTools,
+      gitTools,
+      validationTools,
+      autoContinueService,
+      debugTools: new DebugTools({
+        replayService: autoContinueService.getReplayService(),
       }),
     };
 
@@ -127,6 +139,103 @@ class MCPAutonomousDevServer {
               },
             },
             required: ['filePath', 'content'],
+          },
+        },
+        {
+          name: 'renameVariable',
+          description: 'Safely rename a variable using AST analysis',
+          inputSchema: {
+            type: 'object',
+            properties: {
+              filePath: {
+                type: 'string',
+                description: 'Path to the file containing the variable to rename',
+              },
+              oldName: {
+                type: 'string',
+                description: 'Current name of the variable',
+              },
+              newName: {
+                type: 'string',
+                description: 'New name for the variable',
+              },
+              line: {
+                type: 'number',
+                description: 'Line number where the variable is located (optional)',
+              },
+            },
+            required: ['filePath', 'oldName', 'newName'],
+          },
+        },
+        {
+          name: 'implementFunction',
+          description: 'Generate implementations for function stubs or TODO functions',
+          inputSchema: {
+            type: 'object',
+            properties: {
+              filePath: {
+                type: 'string',
+                description: 'Path to the file containing function stubs',
+              },
+              functionName: {
+                type: 'string',
+                description: 'Name of specific function to implement (optional)',
+              },
+              line: {
+                type: 'number',
+                description: 'Line number of function to implement (optional)',
+              },
+              strategy: {
+                type: 'string',
+                enum: ['conservative', 'balanced', 'creative'],
+                description: 'Implementation strategy: conservative (high-confidence only), balanced (default), creative (allow experimental)',
+              },
+              useEnhanced: {
+                type: 'boolean',
+                description: 'Use enhanced function implementor with context analysis and type inference (default: true)',
+              },
+            },
+            required: ['filePath'],
+          },
+        },
+        {
+          name: 'removeUnusedImports',
+          description: 'Remove unused import statements from TypeScript/JavaScript files',
+          inputSchema: {
+            type: 'object',
+            properties: {
+              filePath: {
+                type: 'string',
+                description: 'Path to the file to analyze and clean up',
+              },
+              dryRun: {
+                type: 'boolean',
+                description: 'Preview changes without applying them (default: false)',
+              },
+            },
+            required: ['filePath'],
+          },
+        },
+        {
+          name: 'removeUnusedVariables',
+          description: 'Remove unused variable declarations from TypeScript/JavaScript files',
+          inputSchema: {
+            type: 'object',
+            properties: {
+              filePath: {
+                type: 'string',
+                description: 'Path to the file to analyze and clean up',
+              },
+              createBackup: {
+                type: 'boolean',
+                description: 'Create a backup file before making changes (default: true)',
+              },
+              safeOnly: {
+                type: 'boolean',
+                description: 'Only remove variables that are safe (local variables, not functions/classes/globals) (default: true)',
+              },
+            },
+            required: ['filePath'],
           },
         },
         // Git Tools
@@ -217,6 +326,7 @@ class MCPAutonomousDevServer {
             required: ['workspacePath'],
           },
         },
+        ...getAutoContinueTools(this.state.autoContinueService),
       ];
 
       return { tools };
@@ -231,12 +341,30 @@ class MCPAutonomousDevServer {
       }
 
       try {
+        const autoContinueResult = await handleAutoContinueTools(
+          name,
+          args,
+          this.state.autoContinueService
+        );
+        if (autoContinueResult) {
+          return {
+            content: [{ type: 'text', text: JSON.stringify(autoContinueResult) }],
+          };
+        }
+
         switch (name) {
-          case 'listTodos':
-            return await this.state.fileSystemTools.listTodos(args as {
+          case 'listTodos': {
+            const todos = await this.state.fileSystemTools.listTodos(args as {
               workspacePath: string;
               filePatterns?: string[];
             });
+            return {
+              content: todos.map((todo) => ({
+                type: 'text',
+                text: JSON.stringify(todo, null, 2),
+              })),
+            };
+          }
 
           case 'readFileContext':
             return await this.state.fileSystemTools.readFileContext(args as {
@@ -252,10 +380,38 @@ class MCPAutonomousDevServer {
               createBackup?: boolean;
             });
 
-          case 'getGitStatus':
-            return await this.state.gitTools.getGitStatus(args as {
-              workspacePath: string;
+          case 'renameVariable':
+            return await this.state.fileSystemTools.renameVariable(args as {
+              filePath: string;
+              oldName: string;
+              newName: string;
+              line?: number;
             });
+
+          case 'implementFunction':
+            return await this.state.fileSystemTools.implementFunction(args as {
+              filePath: string;
+              functionName?: string;
+              line?: number;
+              strategy?: 'conservative' | 'balanced' | 'creative';
+              useEnhanced?: boolean;
+            });
+
+          case 'removeUnusedImports':
+            return await this.state.fileSystemTools.removeUnusedImports(args as {
+              filePath: string;
+              dryRun?: boolean;
+            });
+
+          case 'removeUnusedVariables':
+            return await this.state.fileSystemTools.removeUnusedVariables(args as {
+              filePath: string;
+              createBackup?: boolean;
+              safeOnly?: boolean;
+            });
+
+          case 'getGitStatus':
+            return await this.state.gitTools.getGitStatus();
 
           case 'createBranch':
             return await this.state.gitTools.createBranch(args as {
@@ -263,23 +419,35 @@ class MCPAutonomousDevServer {
               branchName: string;
             });
 
-          case 'validateSyntax':
-            return await this.state.validationTools.validateSyntax(args as {
+          case 'validateSyntax': {
+            const result = await this.state.validationTools.validateSyntax(args as {
               filePath: string;
               content?: string;
             });
+            return {
+              content: [{ type: 'text', text: JSON.stringify(result, null, 2) }],
+            };
+          }
 
-          case 'runTests':
-            return await this.state.validationTools.runTests(args as {
+          case 'runTests': {
+            const result = await this.state.validationTools.runTests(args as {
               workspacePath: string;
               testPattern?: string;
             });
+            return {
+              content: [{ type: 'text', text: JSON.stringify(result, null, 2) }],
+            };
+          }
 
-          case 'checkBuild':
-            return await this.state.validationTools.checkBuild(args as {
+          case 'checkBuild': {
+            const result = await this.state.validationTools.checkBuild(args as {
               workspacePath: string;
               buildCommand?: string;
             });
+            return {
+              content: [{ type: 'text', text: JSON.stringify(result, null, 2) }],
+            };
+          }
 
           default:
             throw new Error(`Unknown tool: ${name}`);
