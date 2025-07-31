@@ -1,6 +1,7 @@
 // Test file for A2 - Error Context Collection
 // Contains properly formatted TODOs to test safety thresholds
 export class TestClass {
+
 t
   // TODO: Add comment about this method functionality
   testMethod() {
