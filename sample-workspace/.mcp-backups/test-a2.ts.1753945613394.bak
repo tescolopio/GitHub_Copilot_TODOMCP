@@ -2,7 +2,6 @@
 // Contains properly formatted TODOs to test safety thresholds
 export class TestClass {
 
-t
   // TODO: Add comment about this method functionality
   testMethod() {
     return 'test';
