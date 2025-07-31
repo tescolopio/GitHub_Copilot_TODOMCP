@@ -1027,10 +1027,10 @@
           "requiresApproval": false
         },
         "execution": {
-          "startTime": "1970-01-01T00:00:00.000Z",
-          "endTime": "1970-01-01T00:00:00.000Z",
-          "duration": 0,
-          "output": "",
+          "startTime": "2025-07-31T07:02:13.798Z",
+          "endTime": "2025-07-31T07:02:13.799Z",
+          "duration": 1,
+          "output": "t",
           "error": ""
         },
         "changes": {
@@ -1064,11 +1064,71 @@
         "workingDirectory": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace",
         "timestamp": "2025-07-31T07:02:13.797Z"
       },
+      "debugInfo": {},
+      "fileStateAfter": "# Sample Python module for testing\n\ndef calculate_fibonacci(n):\n    \"\"\"\n    Calculate the nth Fibonacci number\n    TODO: add input validation for negative numbers\n    \"\"\"\n    if n <= 1:\n        return n\n    return calculate_fibonacci(n-1) + calculate_fibonacci(n-2)\n\ndef is_palindrome(s):\n    \"\"\"\n    Check if a string is a palindrome\n    TODO: fix formatting and make case-insensitive\n    \"\"\"\n    return s==s[::-1]\n\nclass DataProcessor:\n    def __init__(self):\n        # TODO: add comment about initialization\n        self.data = []\n    \n    def add_item(self, item):\n        # TODO: update documentation with type hints\n        self.data.append(item)\n    \n    def process_data(self):\n        # TODO: rename process_data to transform_data\n        return [item.upper() if isinstance(item, str) else item for item in self.data]\n    \n    def get_stats(self):\n        # TODO: implement proper statistics calculation\n        return {\n            'count': len(self.data),\n            'types': list(set(type(item).__name__ for item in self.data))\n        }\n"
+    },
+    {
+      "stepNumber": 19,
+      "action": {
+        "id": "5c443fe2-36bd-4bb3-a4e4-40cf1cffb60d",
+        "sessionId": "af9b3d35-4847-42b6-8741-4f5622c0ba42",
+        "type": "fix_formatting",
+        "status": "pending",
+        "description": "Apply Fix Formatting to: fix formatting issues here",
+        "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/calculator.js",
+        "lineNumber": 14,
+        "timestamp": "2025-07-31T07:02:23.868Z",
+        "metadata": {
+          "todoText": "fix formatting issues here",
+          "patternId": "fix-formatting",
+          "confidence": 0.85,
+          "riskLevel": "low",
+          "estimatedDuration": 1000,
+          "requiresApproval": false
+        },
+        "execution": {
+          "startTime": "1970-01-01T00:00:00.000Z",
+          "endTime": "1970-01-01T00:00:00.000Z",
+          "duration": 0,
+          "output": "",
+          "error": ""
+        },
+        "changes": {
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/calculator.js",
+          "beforeChecksum": ""
+        },
+        "todo": {
+          "id": "calculator.js-14-1753945325358",
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/calculator.js",
+          "line": 14,
+          "column": 4,
+          "content": "fix formatting issues here",
+          "context": {
+            "before": [
+              "    return result;",
+              "  }",
+              "  subtract(a, b) {"
+            ],
+            "after": [
+              "    const result = a - b;",
+              "    this.history.push({ operation: 'subtract', a, b, result });",
+              "    return result;"
+            ]
+          },
+          "type": "TODO",
+          "confidence": 0.8
+        }
+      },
+      "fileStateBefore": "// Sample JavaScript file for testing TODO detection\nclass Calculator {\n  constructor() {\n    // TODO: add proper initialization\n    this.history = [];\n  }\n  add(a, b) {\n    // TODO: add input validation\n    const result = a + b;\n    this.history.push({ operation: 'add', a, b, result });\n    return result;\n  }\n  subtract(a, b) {\n    // TODO: fix formatting issues here\n    const result = a - b;\n    this.history.push({ operation: 'subtract', a, b, result });\n    return result;\n  }\n  multiply(a, b) {\n    // TODO: update documentation for this method\n    const result = a * b;\n    this.history.push({ operation: 'multiply', a, b, result });\n    return result;\n  }\n  divide(a, b) {\n    // TODO: handle division by zero\n    if (b === 0) {\n      throw new Error('Division by zero');\n    }\n    const result = a / b;\n    this.history.push({ operation: 'divide', a, b, result });\n    return result;\n  }\n  getHistory() {\n    // TODO: rename getHistory to getCalculationHistory\n    return this.history;\n  }\n  clearHistory() {\n    // TODO: implement proper cleanup logic\n    this.history = [];\n  }\n}\nmodule.exports = Calculator;",
+      "environmentState": {
+        "workingDirectory": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace",
+        "timestamp": "2025-07-31T07:02:23.868Z"
+      },
       "debugInfo": {}
     }
   ],
   "metadata": {
-    "totalSteps": 18,
+    "totalSteps": 19,
     "startTime": "2025-07-31T07:01:30.317Z",
     "status": "recording"
   }
