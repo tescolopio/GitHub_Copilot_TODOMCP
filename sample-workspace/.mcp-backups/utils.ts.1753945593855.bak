@@ -1,5 +1,6 @@
 // Sample TypeScript utility functions
 export class StringUtils {
+
 t
   // TODO: add comment explaining this method
   static capitalize(str: string): string {
