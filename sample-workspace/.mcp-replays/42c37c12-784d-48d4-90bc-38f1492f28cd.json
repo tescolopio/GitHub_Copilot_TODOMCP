@@ -554,10 +554,10 @@
           "requiresApproval": false
         },
         "execution": {
-          "startTime": "1970-01-01T00:00:00.000Z",
-          "endTime": "1970-01-01T00:00:00.000Z",
-          "duration": 0,
-          "output": "",
+          "startTime": "2025-07-31T07:00:12.837Z",
+          "endTime": "2025-07-31T07:00:12.838Z",
+          "duration": 1,
+          "output": "t",
           "error": ""
         },
         "changes": {
@@ -591,11 +591,484 @@
         "workingDirectory": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace",
         "timestamp": "2025-07-31T07:00:12.836Z"
       },
+      "debugInfo": {},
+      "fileStateAfter": "// Sample JavaScript file for testing TODO detection\nclass Calculator {\n  constructor() {\n    // TODO: add proper initialization\n    this.history = [];\n  }\n  add(a, b) {\n    // TODO: add input validation\n    const result = a + b;\n    this.history.push({ operation: 'add', a, b, result });\n    return result;\n  }\n  subtract(a, b) {\n    // TODO: fix formatting issues here\n    const result = a - b;\n    this.history.push({ operation: 'subtract', a, b, result });\n    return result;\n  }\n  multiply(a, b) {\n    // TODO: update documentation for this method\n    const result = a * b;\n    this.history.push({ operation: 'multiply', a, b, result });\n    return result;\n  }\n  divide(a, b) {\n    // TODO: handle division by zero\n    if (b === 0) {\n      throw new Error('Division by zero');\n    }\n    const result = a / b;\n    this.history.push({ operation: 'divide', a, b, result });\n    return result;\n  }\n  getHistory() {\n    // TODO: rename getHistory to getCalculationHistory\n    return this.history;\n  }\n  clearHistory() {\n    // TODO: implement proper cleanup logic\n    this.history = [];\n  }\n}\nmodule.exports = Calculator;"
+    },
+    {
+      "stepNumber": 11,
+      "action": {
+        "id": "72b4f3c9-1da6-4527-89a0-c64d93686efb",
+        "sessionId": "42c37c12-784d-48d4-90bc-38f1492f28cd",
+        "type": "add_comment",
+        "status": "pending",
+        "description": "Apply Add Comment to: add comment explaining this method",
+        "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/utils.ts",
+        "lineNumber": 11,
+        "timestamp": "2025-07-31T07:00:22.907Z",
+        "metadata": {
+          "todoText": "add comment explaining this method",
+          "patternId": "add-comment",
+          "confidence": 0.9,
+          "riskLevel": "low",
+          "estimatedDuration": 1000,
+          "requiresApproval": false
+        },
+        "execution": {
+          "startTime": "2025-07-31T07:00:22.909Z",
+          "endTime": "2025-07-31T07:00:23.506Z",
+          "duration": 1,
+          "output": "Added comment: t",
+          "error": "Validation Error: Validation failed: error TS5042: Option 'project' cannot be mixed with source files on a command line."
+        },
+        "changes": {
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/utils.ts",
+          "beforeChecksum": ""
+        },
+        "todo": {
+          "id": "utils.ts-11-1753945222906",
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/utils.ts",
+          "line": 11,
+          "column": 2,
+          "content": "add comment explaining this method",
+          "context": {
+            "before": [
+              "t",
+              "t",
+              "t"
+            ],
+            "after": [
+              "  static capitalize(str: string): string {",
+              "    return str.charAt(0).toUpperCase() + str.slice(1);",
+              "  }"
+            ]
+          },
+          "type": "TODO",
+          "confidence": 0.8
+        }
+      },
+      "fileStateBefore": "// Sample TypeScript utility functions\nexport class StringUtils {\nt\nt\nt\nt\nt\nt\nt\nt\n  // TODO: add comment explaining this method\n  static capitalize(str: string): string {\n    return str.charAt(0).toUpperCase() + str.slice(1);\n  }\n  // TODO: fix formatting\n  static reverse(str:string):string{\n    return str.split('').reverse().join('');\n  }\n  // TODO: update documentation with examples\n  static truncate(str: string, maxLength: number): string {\n    if (str.length <= maxLength) {\n      return str;\n    }\n    return str.substring(0, maxLength - 3) + '...';\n  }\n  // TODO: rename camelCase to toCamelCase\n  static camelCase(str: string): string {\n    return str\n      .toLowerCase()\n      .replace(/[^a-zA-Z0-9]+(.)/g, (match, char) => char.toUpperCase());\n  }\n}\nexport class NumberUtils {\n  // TODO: add proper error handling\n  static factorial(n: number): number {\n    if (n < 0) return -1;\n    if (n === 0) return 1;\n    return n * NumberUtils.factorial(n - 1);\n  }\n  // TODO: implement proper validation\n  static isPrime(n: number): boolean {\n    if (n < 2) return false;\n    for (let i = 2; i <= Math.sqrt(n); i++) {\n      if (n % i === 0) return false;\n    }\n    return true;\n  }\n}",
+      "environmentState": {
+        "workingDirectory": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace",
+        "timestamp": "2025-07-31T07:00:22.907Z"
+      },
+      "debugInfo": {}
+    },
+    {
+      "stepNumber": 12,
+      "action": {
+        "id": "b3c27296-cd2c-451e-a815-f1b0bfc576ba",
+        "sessionId": "42c37c12-784d-48d4-90bc-38f1492f28cd",
+        "type": "fix_formatting",
+        "status": "pending",
+        "description": "Apply Fix Formatting to: fix formatting",
+        "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/utils.ts",
+        "lineNumber": 15,
+        "timestamp": "2025-07-31T07:00:23.510Z",
+        "metadata": {
+          "todoText": "fix formatting",
+          "patternId": "fix-formatting",
+          "confidence": 0.85,
+          "riskLevel": "low",
+          "estimatedDuration": 1000,
+          "requiresApproval": false
+        },
+        "execution": {
+          "startTime": "2025-07-31T07:00:23.512Z",
+          "endTime": "2025-07-31T07:00:24.112Z",
+          "duration": 1,
+          "output": "No formatting issues found",
+          "error": "Validation Error: Validation failed: error TS5042: Option 'project' cannot be mixed with source files on a command line."
+        },
+        "changes": {
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/utils.ts",
+          "beforeChecksum": ""
+        },
+        "todo": {
+          "id": "utils.ts-15-1753945222906",
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/utils.ts",
+          "line": 15,
+          "column": 2,
+          "content": "fix formatting",
+          "context": {
+            "before": [
+              "  static capitalize(str: string): string {",
+              "    return str.charAt(0).toUpperCase() + str.slice(1);",
+              "  }"
+            ],
+            "after": [
+              "  static reverse(str:string):string{",
+              "    return str.split('').reverse().join('');",
+              "  }"
+            ]
+          },
+          "type": "TODO",
+          "confidence": 0.8
+        }
+      },
+      "fileStateBefore": "// Sample TypeScript utility functions\nexport class StringUtils {\nt\nt\nt\nt\nt\nt\nt\nt\n  // TODO: add comment explaining this method\n  static capitalize(str: string): string {\n    return str.charAt(0).toUpperCase() + str.slice(1);\n  }\n  // TODO: fix formatting\n  static reverse(str:string):string{\n    return str.split('').reverse().join('');\n  }\n  // TODO: update documentation with examples\n  static truncate(str: string, maxLength: number): string {\n    if (str.length <= maxLength) {\n      return str;\n    }\n    return str.substring(0, maxLength - 3) + '...';\n  }\n  // TODO: rename camelCase to toCamelCase\n  static camelCase(str: string): string {\n    return str\n      .toLowerCase()\n      .replace(/[^a-zA-Z0-9]+(.)/g, (match, char) => char.toUpperCase());\n  }\n}\nexport class NumberUtils {\n  // TODO: add proper error handling\n  static factorial(n: number): number {\n    if (n < 0) return -1;\n    if (n === 0) return 1;\n    return n * NumberUtils.factorial(n - 1);\n  }\n  // TODO: implement proper validation\n  static isPrime(n: number): boolean {\n    if (n < 2) return false;\n    for (let i = 2; i <= Math.sqrt(n); i++) {\n      if (n % i === 0) return false;\n    }\n    return true;\n  }\n}",
+      "environmentState": {
+        "workingDirectory": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace",
+        "timestamp": "2025-07-31T07:00:23.510Z"
+      },
+      "debugInfo": {}
+    },
+    {
+      "stepNumber": 13,
+      "action": {
+        "id": "f3103f01-164c-4831-a863-0509471a8a5e",
+        "sessionId": "42c37c12-784d-48d4-90bc-38f1492f28cd",
+        "type": "update_documentation",
+        "status": "pending",
+        "description": "Apply Update Documentation to: update documentation with examples",
+        "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/utils.ts",
+        "lineNumber": 19,
+        "timestamp": "2025-07-31T07:00:24.116Z",
+        "metadata": {
+          "todoText": "update documentation with examples",
+          "patternId": "update-documentation",
+          "confidence": 0.8,
+          "riskLevel": "low",
+          "estimatedDuration": 1000,
+          "requiresApproval": false
+        },
+        "execution": {
+          "startTime": "2025-07-31T07:00:24.118Z",
+          "endTime": "2025-07-31T07:00:24.722Z",
+          "duration": 1,
+          "output": "e",
+          "error": "Validation Error: Validation failed: error TS5042: Option 'project' cannot be mixed with source files on a command line."
+        },
+        "changes": {
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/utils.ts",
+          "beforeChecksum": ""
+        },
+        "todo": {
+          "id": "utils.ts-19-1753945222906",
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/utils.ts",
+          "line": 19,
+          "column": 2,
+          "content": "update documentation with examples",
+          "context": {
+            "before": [
+              "  static reverse(str:string):string{",
+              "    return str.split('').reverse().join('');",
+              "  }"
+            ],
+            "after": [
+              "  static truncate(str: string, maxLength: number): string {",
+              "    if (str.length <= maxLength) {",
+              "      return str;"
+            ]
+          },
+          "type": "TODO",
+          "confidence": 0.7
+        }
+      },
+      "fileStateBefore": "// Sample TypeScript utility functions\nexport class StringUtils {\nt\nt\nt\nt\nt\nt\nt\nt\n  // TODO: add comment explaining this method\n  static capitalize(str: string): string {\n    return str.charAt(0).toUpperCase() + str.slice(1);\n  }\n  // TODO: fix formatting\n  static reverse(str:string):string{\n    return str.split('').reverse().join('');\n  }\n  // TODO: update documentation with examples\n  static truncate(str: string, maxLength: number): string {\n    if (str.length <= maxLength) {\n      return str;\n    }\n    return str.substring(0, maxLength - 3) + '...';\n  }\n  // TODO: rename camelCase to toCamelCase\n  static camelCase(str: string): string {\n    return str\n      .toLowerCase()\n      .replace(/[^a-zA-Z0-9]+(.)/g, (match, char) => char.toUpperCase());\n  }\n}\nexport class NumberUtils {\n  // TODO: add proper error handling\n  static factorial(n: number): number {\n    if (n < 0) return -1;\n    if (n === 0) return 1;\n    return n * NumberUtils.factorial(n - 1);\n  }\n  // TODO: implement proper validation\n  static isPrime(n: number): boolean {\n    if (n < 2) return false;\n    for (let i = 2; i <= Math.sqrt(n); i++) {\n      if (n % i === 0) return false;\n    }\n    return true;\n  }\n}",
+      "environmentState": {
+        "workingDirectory": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace",
+        "timestamp": "2025-07-31T07:00:24.116Z"
+      },
+      "debugInfo": {}
+    },
+    {
+      "stepNumber": 14,
+      "action": {
+        "id": "61296aeb-96be-4c20-b8a6-6ff18fd1224e",
+        "sessionId": "42c37c12-784d-48d4-90bc-38f1492f28cd",
+        "type": "add_comment",
+        "status": "pending",
+        "description": "Apply Add Comment to: Add comment about this method functionality",
+        "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/test-a2.ts",
+        "lineNumber": 11,
+        "timestamp": "2025-07-31T07:00:24.729Z",
+        "metadata": {
+          "todoText": "Add comment about this method functionality",
+          "patternId": "add-comment",
+          "confidence": 0.9,
+          "riskLevel": "low",
+          "estimatedDuration": 1000,
+          "requiresApproval": false
+        },
+        "execution": {
+          "startTime": "2025-07-31T07:00:24.730Z",
+          "endTime": "2025-07-31T07:00:25.366Z",
+          "duration": 2,
+          "output": "Added comment: t",
+          "error": "Validation Error: Validation failed: error TS5042: Option 'project' cannot be mixed with source files on a command line."
+        },
+        "changes": {
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/test-a2.ts",
+          "beforeChecksum": ""
+        },
+        "todo": {
+          "id": "test-a2.ts-11-1753945222906",
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/test-a2.ts",
+          "line": 11,
+          "column": 2,
+          "content": "Add comment about this method functionality",
+          "context": {
+            "before": [
+              "t",
+              "t",
+              "t"
+            ],
+            "after": [
+              "  testMethod() {",
+              "    return 'test';",
+              "  }"
+            ]
+          },
+          "type": "TODO",
+          "confidence": 0.8
+        }
+      },
+      "fileStateBefore": "// Test file for A2 - Error Context Collection\n// Contains properly formatted TODOs to test safety thresholds\nexport class TestClass {\nt\nt\nt\nt\nt\nt\nt\n  // TODO: Add comment about this method functionality\n  testMethod() {\n    return 'test';\n  }\n  // TODO: Fix formatting in this code block\n  badlyFormatted() {\n    let    x   =    1;\n      return     x;\n  }\n  // TODO: Add import for lodash utility\n  processData() {\n    // Would use lodash here\n    return [];\n  }\n  // TODO: Update documentation for this complex algorithm\n  complexAlgorithm() {\n    // Complex logic here\n    return 42;\n  }\n}",
+      "environmentState": {
+        "workingDirectory": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace",
+        "timestamp": "2025-07-31T07:00:24.729Z"
+      },
+      "debugInfo": {}
+    },
+    {
+      "stepNumber": 15,
+      "action": {
+        "id": "2c6567c1-f7a4-4042-b8ae-f1aa5b573606",
+        "sessionId": "42c37c12-784d-48d4-90bc-38f1492f28cd",
+        "type": "fix_formatting",
+        "status": "pending",
+        "description": "Apply Fix Formatting to: Fix formatting in this code block",
+        "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/test-a2.ts",
+        "lineNumber": 15,
+        "timestamp": "2025-07-31T07:00:25.372Z",
+        "metadata": {
+          "todoText": "Fix formatting in this code block",
+          "patternId": "fix-formatting",
+          "confidence": 0.85,
+          "riskLevel": "low",
+          "estimatedDuration": 1000,
+          "requiresApproval": false
+        },
+        "execution": {
+          "startTime": "2025-07-31T07:00:25.373Z",
+          "endTime": "2025-07-31T07:00:26.057Z",
+          "duration": 1,
+          "output": "No formatting issues found",
+          "error": "Validation Error: Validation failed: error TS5042: Option 'project' cannot be mixed with source files on a command line."
+        },
+        "changes": {
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/test-a2.ts",
+          "beforeChecksum": ""
+        },
+        "todo": {
+          "id": "test-a2.ts-15-1753945222906",
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/test-a2.ts",
+          "line": 15,
+          "column": 2,
+          "content": "Fix formatting in this code block",
+          "context": {
+            "before": [
+              "  testMethod() {",
+              "    return 'test';",
+              "  }"
+            ],
+            "after": [
+              "  badlyFormatted() {",
+              "    let    x   =    1;",
+              "      return     x;"
+            ]
+          },
+          "type": "TODO",
+          "confidence": 0.8
+        }
+      },
+      "fileStateBefore": "// Test file for A2 - Error Context Collection\n// Contains properly formatted TODOs to test safety thresholds\nexport class TestClass {\nt\nt\nt\nt\nt\nt\nt\n  // TODO: Add comment about this method functionality\n  testMethod() {\n    return 'test';\n  }\n  // TODO: Fix formatting in this code block\n  badlyFormatted() {\n    let    x   =    1;\n      return     x;\n  }\n  // TODO: Add import for lodash utility\n  processData() {\n    // Would use lodash here\n    return [];\n  }\n  // TODO: Update documentation for this complex algorithm\n  complexAlgorithm() {\n    // Complex logic here\n    return 42;\n  }\n}",
+      "environmentState": {
+        "workingDirectory": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace",
+        "timestamp": "2025-07-31T07:00:25.372Z"
+      },
+      "debugInfo": {}
+    },
+    {
+      "stepNumber": 16,
+      "action": {
+        "id": "f37d0bed-f078-4220-8652-ace7adaa18b2",
+        "sessionId": "42c37c12-784d-48d4-90bc-38f1492f28cd",
+        "type": "update_documentation",
+        "status": "pending",
+        "description": "Apply Update Documentation to: Update documentation for this complex algorithm",
+        "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/test-a2.ts",
+        "lineNumber": 25,
+        "timestamp": "2025-07-31T07:00:26.062Z",
+        "metadata": {
+          "todoText": "Update documentation for this complex algorithm",
+          "patternId": "update-documentation",
+          "confidence": 0.8,
+          "riskLevel": "low",
+          "estimatedDuration": 1000,
+          "requiresApproval": false
+        },
+        "execution": {
+          "startTime": "2025-07-31T07:00:26.063Z",
+          "endTime": "2025-07-31T07:00:26.687Z",
+          "duration": 3,
+          "output": "t",
+          "error": "Validation Error: Validation failed: error TS5042: Option 'project' cannot be mixed with source files on a command line."
+        },
+        "changes": {
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/test-a2.ts",
+          "beforeChecksum": ""
+        },
+        "todo": {
+          "id": "test-a2.ts-25-1753945222906",
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/test-a2.ts",
+          "line": 25,
+          "column": 2,
+          "content": "Update documentation for this complex algorithm",
+          "context": {
+            "before": [
+              "    // Would use lodash here",
+              "    return [];",
+              "  }"
+            ],
+            "after": [
+              "  complexAlgorithm() {",
+              "    // Complex logic here",
+              "    return 42;"
+            ]
+          },
+          "type": "TODO",
+          "confidence": 0.7
+        }
+      },
+      "fileStateBefore": "// Test file for A2 - Error Context Collection\n// Contains properly formatted TODOs to test safety thresholds\nexport class TestClass {\nt\nt\nt\nt\nt\nt\nt\n  // TODO: Add comment about this method functionality\n  testMethod() {\n    return 'test';\n  }\n  // TODO: Fix formatting in this code block\n  badlyFormatted() {\n    let    x   =    1;\n      return     x;\n  }\n  // TODO: Add import for lodash utility\n  processData() {\n    // Would use lodash here\n    return [];\n  }\n  // TODO: Update documentation for this complex algorithm\n  complexAlgorithm() {\n    // Complex logic here\n    return 42;\n  }\n}",
+      "environmentState": {
+        "workingDirectory": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace",
+        "timestamp": "2025-07-31T07:00:26.062Z"
+      },
+      "debugInfo": {}
+    },
+    {
+      "stepNumber": 17,
+      "action": {
+        "id": "e08f541c-cdec-4316-877c-47a514ade660",
+        "sessionId": "42c37c12-784d-48d4-90bc-38f1492f28cd",
+        "type": "add_comment",
+        "status": "pending",
+        "description": "Apply Add Comment to: add comment about initialization",
+        "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/processor.py",
+        "lineNumber": 21,
+        "timestamp": "2025-07-31T07:00:26.691Z",
+        "metadata": {
+          "todoText": "add comment about initialization",
+          "patternId": "add-comment",
+          "confidence": 0.9,
+          "riskLevel": "low",
+          "estimatedDuration": 1000,
+          "requiresApproval": false
+        },
+        "execution": {
+          "startTime": "2025-07-31T07:00:26.693Z",
+          "endTime": "2025-07-31T07:00:26.737Z",
+          "duration": 2,
+          "output": "Added comment: i",
+          "error": "Validation Error: Validation failed: Sorry: IndentationError: expected an indented block after function definition on line 20 (.temp-1753945226696.py, line 21)"
+        },
+        "changes": {
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/processor.py",
+          "beforeChecksum": ""
+        },
+        "todo": {
+          "id": "processor.py-21-1753945222906",
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/processor.py",
+          "line": 21,
+          "column": 8,
+          "content": "add comment about initialization",
+          "context": {
+            "before": [
+              "",
+              "class DataProcessor:",
+              "    def __init__(self):"
+            ],
+            "after": [
+              "        self.data = []",
+              "    ",
+              "    def add_item(self, item):"
+            ]
+          },
+          "type": "TODO",
+          "confidence": 0.8
+        }
+      },
+      "fileStateBefore": "# Sample Python module for testing\n\ndef calculate_fibonacci(n):\n    \"\"\"\n    Calculate the nth Fibonacci number\n    TODO: add input validation for negative numbers\n    \"\"\"\n    if n <= 1:\n        return n\n    return calculate_fibonacci(n-1) + calculate_fibonacci(n-2)\n\ndef is_palindrome(s):\n    \"\"\"\n    Check if a string is a palindrome\n    TODO: fix formatting and make case-insensitive\n    \"\"\"\n    return s==s[::-1]\n\nclass DataProcessor:\n    def __init__(self):\n        # TODO: add comment about initialization\n        self.data = []\n    \n    def add_item(self, item):\n        # TODO: update documentation with type hints\n        self.data.append(item)\n    \n    def process_data(self):\n        # TODO: rename process_data to transform_data\n        return [item.upper() if isinstance(item, str) else item for item in self.data]\n    \n    def get_stats(self):\n        # TODO: implement proper statistics calculation\n        return {\n            'count': len(self.data),\n            'types': list(set(type(item).__name__ for item in self.data))\n        }\n",
+      "environmentState": {
+        "workingDirectory": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace",
+        "timestamp": "2025-07-31T07:00:26.691Z"
+      },
+      "debugInfo": {}
+    },
+    {
+      "stepNumber": 18,
+      "action": {
+        "id": "753329a9-7f03-4470-97dc-0e08685d61c7",
+        "sessionId": "42c37c12-784d-48d4-90bc-38f1492f28cd",
+        "type": "update_documentation",
+        "status": "pending",
+        "description": "Apply Update Documentation to: update documentation with type hints",
+        "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/processor.py",
+        "lineNumber": 25,
+        "timestamp": "2025-07-31T07:00:26.741Z",
+        "metadata": {
+          "todoText": "update documentation with type hints",
+          "patternId": "update-documentation",
+          "confidence": 0.8,
+          "riskLevel": "low",
+          "estimatedDuration": 1000,
+          "requiresApproval": false
+        },
+        "execution": {
+          "startTime": "1970-01-01T00:00:00.000Z",
+          "endTime": "1970-01-01T00:00:00.000Z",
+          "duration": 0,
+          "output": "",
+          "error": ""
+        },
+        "changes": {
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/processor.py",
+          "beforeChecksum": ""
+        },
+        "todo": {
+          "id": "processor.py-25-1753945222906",
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/processor.py",
+          "line": 25,
+          "column": 8,
+          "content": "update documentation with type hints",
+          "context": {
+            "before": [
+              "        self.data = []",
+              "    ",
+              "    def add_item(self, item):"
+            ],
+            "after": [
+              "        self.data.append(item)",
+              "    ",
+              "    def process_data(self):"
+            ]
+          },
+          "type": "TODO",
+          "confidence": 0.7
+        }
+      },
+      "fileStateBefore": "# Sample Python module for testing\n\ndef calculate_fibonacci(n):\n    \"\"\"\n    Calculate the nth Fibonacci number\n    TODO: add input validation for negative numbers\n    \"\"\"\n    if n <= 1:\n        return n\n    return calculate_fibonacci(n-1) + calculate_fibonacci(n-2)\n\ndef is_palindrome(s):\n    \"\"\"\n    Check if a string is a palindrome\n    TODO: fix formatting and make case-insensitive\n    \"\"\"\n    return s==s[::-1]\n\nclass DataProcessor:\n    def __init__(self):\n        # TODO: add comment about initialization\n        self.data = []\n    \n    def add_item(self, item):\n        # TODO: update documentation with type hints\n        self.data.append(item)\n    \n    def process_data(self):\n        # TODO: rename process_data to transform_data\n        return [item.upper() if isinstance(item, str) else item for item in self.data]\n    \n    def get_stats(self):\n        # TODO: implement proper statistics calculation\n        return {\n            'count': len(self.data),\n            'types': list(set(type(item).__name__ for item in self.data))\n        }\n",
+      "environmentState": {
+        "workingDirectory": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace",
+        "timestamp": "2025-07-31T07:00:26.741Z"
+      },
       "debugInfo": {}
     }
   ],
   "metadata": {
-    "totalSteps": 10,
+    "totalSteps": 18,
     "startTime": "2025-07-31T06:59:50.523Z",
     "status": "recording"
   }
