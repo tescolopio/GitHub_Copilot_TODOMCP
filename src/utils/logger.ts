@@ -49,3 +49,13 @@ export function createLogger(service: string): winston.Logger {
 }
 
 export const logger = createLogger('MCPServer');
+
+// Add a simple way to close the logger for graceful shutdown
+export function closeLogger() {
+  if (logger) {
+    const pinoLogger = logger as any;
+    if (pinoLogger.transport && typeof pinoLogger.transport.destroy === 'function') {
+      pinoLogger.transport.destroy();
+    }
+  }
+}

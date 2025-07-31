@@ -1,0 +1,601 @@
+{
+  "sessionId": "d7c4745b-7907-4935-8fdd-ee73f8604b02",
+  "steps": [
+    {
+      "stepNumber": 1,
+      "action": {
+        "id": "7010880e-f9f9-4766-b854-d000b5ec34a9",
+        "sessionId": "d7c4745b-7907-4935-8fdd-ee73f8604b02",
+        "type": "add_comment",
+        "status": "pending",
+        "description": "Apply Add Comment to: add comment explaining this method",
+        "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/utils.ts",
+        "lineNumber": 4,
+        "timestamp": "2025-07-31T05:22:39.558Z",
+        "metadata": {
+          "todoText": "add comment explaining this method",
+          "patternId": "add-comment",
+          "confidence": 0.9,
+          "riskLevel": "low",
+          "estimatedDuration": 1000,
+          "requiresApproval": false
+        },
+        "execution": {
+          "startTime": "2025-07-31T05:22:39.559Z",
+          "endTime": "2025-07-31T05:22:41.044Z",
+          "duration": 4,
+          "output": "Added comment: t",
+          "error": "Git Error: Failed to commit changes for action 7010880e-f9f9-4766-b854-d000b5ec34a9: Command failed: git commit -m \"[MCP Auto] Apply Add Comment to: add comment explaining this method\"\nAuthor identity unknown\n\n*** Please tell me who you are.\n\nRun\n\n  git config --global user.email \"you@example.com\"\n  git config --global user.name \"Your Name\"\n\nto set your account's default identity.\nOmit --global to set the identity only in this repository.\n\nfatal: empty ident name (for <xbyooki@EE-UFO-TIM.localdomain>) not allowed\n"
+        },
+        "changes": {
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/utils.ts",
+          "beforeChecksum": ""
+        },
+        "todo": {
+          "id": "utils.ts-4-1753939359553",
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/utils.ts",
+          "line": 4,
+          "column": 2,
+          "content": "add comment explaining this method",
+          "context": {
+            "before": [
+              "// Sample TypeScript utility functions",
+              "",
+              "export class StringUtils {"
+            ],
+            "after": [
+              "  static capitalize(str: string): string {",
+              "    return str.charAt(0).toUpperCase() + str.slice(1);",
+              "  }"
+            ]
+          },
+          "type": "TODO",
+          "confidence": 0.8
+        }
+      },
+      "fileStateBefore": "// Sample TypeScript utility functions\n\nexport class StringUtils {\n  // TODO: add comment explaining this method\n  static capitalize(str: string): string {\n    return str.charAt(0).toUpperCase() + str.slice(1);\n  }\n\n  // TODO: fix formatting\n  static reverse(str:string):string{\n    return str.split('').reverse().join('');\n  }\n\n  // TODO: update documentation with examples\n  static truncate(str: string, maxLength: number): string {\n    if (str.length <= maxLength) {\n      return str;\n    }\n    return str.substring(0, maxLength - 3) + '...';\n  }\n\n  // TODO: rename camelCase to toCamelCase\n  static camelCase(str: string): string {\n    return str\n      .toLowerCase()\n      .replace(/[^a-zA-Z0-9]+(.)/g, (match, char) => char.toUpperCase());\n  }\n}\n\nexport class NumberUtils {\n  // TODO: add proper error handling\n  static factorial(n: number): number {\n    if (n < 0) return -1;\n    if (n === 0) return 1;\n    return n * NumberUtils.factorial(n - 1);\n  }\n\n  // TODO: implement proper validation\n  static isPrime(n: number): boolean {\n    if (n < 2) return false;\n    for (let i = 2; i <= Math.sqrt(n); i++) {\n      if (n % i === 0) return false;\n    }\n    return true;\n  }\n}\n",
+      "environmentState": {
+        "workingDirectory": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace",
+        "timestamp": "2025-07-31T05:22:39.559Z"
+      },
+      "debugInfo": {}
+    },
+    {
+      "stepNumber": 2,
+      "action": {
+        "id": "d478cafa-0830-42e4-a4a4-03bbfb26bf92",
+        "sessionId": "d7c4745b-7907-4935-8fdd-ee73f8604b02",
+        "type": "fix_formatting",
+        "status": "pending",
+        "description": "Apply Fix Formatting to: fix formatting",
+        "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/utils.ts",
+        "lineNumber": 9,
+        "timestamp": "2025-07-31T05:22:41.073Z",
+        "metadata": {
+          "todoText": "fix formatting",
+          "patternId": "fix-formatting",
+          "confidence": 0.85,
+          "riskLevel": "low",
+          "estimatedDuration": 1000,
+          "requiresApproval": false
+        },
+        "execution": {
+          "startTime": "2025-07-31T05:22:41.074Z",
+          "endTime": "2025-07-31T05:22:42.436Z",
+          "duration": 2,
+          "output": "Fixed formatting issues",
+          "error": "Git Error: Failed to commit changes for action d478cafa-0830-42e4-a4a4-03bbfb26bf92: Command failed: git commit -m \"[MCP Auto] Apply Fix Formatting to: fix formatting\"\nAuthor identity unknown\n\n*** Please tell me who you are.\n\nRun\n\n  git config --global user.email \"you@example.com\"\n  git config --global user.name \"Your Name\"\n\nto set your account's default identity.\nOmit --global to set the identity only in this repository.\n\nfatal: empty ident name (for <xbyooki@EE-UFO-TIM.localdomain>) not allowed\n"
+        },
+        "changes": {
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/utils.ts",
+          "beforeChecksum": ""
+        },
+        "todo": {
+          "id": "utils.ts-9-1753939359554",
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/utils.ts",
+          "line": 9,
+          "column": 2,
+          "content": "fix formatting",
+          "context": {
+            "before": [
+              "    return str.charAt(0).toUpperCase() + str.slice(1);",
+              "  }",
+              ""
+            ],
+            "after": [
+              "  static reverse(str:string):string{",
+              "    return str.split('').reverse().join('');",
+              "  }"
+            ]
+          },
+          "type": "TODO",
+          "confidence": 0.8
+        }
+      },
+      "fileStateBefore": "// Sample TypeScript utility functions\n\nexport class StringUtils {\n  // TODO: add comment explaining this method\n  static capitalize(str: string): string {\n    return str.charAt(0).toUpperCase() + str.slice(1);\n  }\n\n  // TODO: fix formatting\n  static reverse(str:string):string{\n    return str.split('').reverse().join('');\n  }\n\n  // TODO: update documentation with examples\n  static truncate(str: string, maxLength: number): string {\n    if (str.length <= maxLength) {\n      return str;\n    }\n    return str.substring(0, maxLength - 3) + '...';\n  }\n\n  // TODO: rename camelCase to toCamelCase\n  static camelCase(str: string): string {\n    return str\n      .toLowerCase()\n      .replace(/[^a-zA-Z0-9]+(.)/g, (match, char) => char.toUpperCase());\n  }\n}\n\nexport class NumberUtils {\n  // TODO: add proper error handling\n  static factorial(n: number): number {\n    if (n < 0) return -1;\n    if (n === 0) return 1;\n    return n * NumberUtils.factorial(n - 1);\n  }\n\n  // TODO: implement proper validation\n  static isPrime(n: number): boolean {\n    if (n < 2) return false;\n    for (let i = 2; i <= Math.sqrt(n); i++) {\n      if (n % i === 0) return false;\n    }\n    return true;\n  }\n}\n",
+      "environmentState": {
+        "workingDirectory": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace",
+        "timestamp": "2025-07-31T05:22:41.074Z"
+      },
+      "debugInfo": {}
+    },
+    {
+      "stepNumber": 3,
+      "action": {
+        "id": "e6ef2b87-f06f-4f4b-b87c-c5baace3ebbc",
+        "sessionId": "d7c4745b-7907-4935-8fdd-ee73f8604b02",
+        "type": "update_documentation",
+        "status": "pending",
+        "description": "Apply Update Documentation to: update documentation with examples",
+        "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/utils.ts",
+        "lineNumber": 14,
+        "timestamp": "2025-07-31T05:22:42.443Z",
+        "metadata": {
+          "todoText": "update documentation with examples",
+          "patternId": "update-documentation",
+          "confidence": 0.8,
+          "riskLevel": "low",
+          "estimatedDuration": 1000,
+          "requiresApproval": false
+        },
+        "execution": {
+          "startTime": "2025-07-31T05:22:42.444Z",
+          "endTime": "2025-07-31T05:22:43.796Z",
+          "duration": 2,
+          "output": "e",
+          "error": "Git Error: Failed to commit changes for action e6ef2b87-f06f-4f4b-b87c-c5baace3ebbc: Command failed: git commit -m \"[MCP Auto] Apply Update Documentation to: update documentation with examples\"\nAuthor identity unknown\n\n*** Please tell me who you are.\n\nRun\n\n  git config --global user.email \"you@example.com\"\n  git config --global user.name \"Your Name\"\n\nto set your account's default identity.\nOmit --global to set the identity only in this repository.\n\nfatal: empty ident name (for <xbyooki@EE-UFO-TIM.localdomain>) not allowed\n"
+        },
+        "changes": {
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/utils.ts",
+          "beforeChecksum": ""
+        },
+        "todo": {
+          "id": "utils.ts-14-1753939359554",
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/utils.ts",
+          "line": 14,
+          "column": 2,
+          "content": "update documentation with examples",
+          "context": {
+            "before": [
+              "    return str.split('').reverse().join('');",
+              "  }",
+              ""
+            ],
+            "after": [
+              "  static truncate(str: string, maxLength: number): string {",
+              "    if (str.length <= maxLength) {",
+              "      return str;"
+            ]
+          },
+          "type": "TODO",
+          "confidence": 0.7
+        }
+      },
+      "fileStateBefore": "// Sample TypeScript utility functions\n\nexport class StringUtils {\n  // TODO: add comment explaining this method\n  static capitalize(str: string): string {\n    return str.charAt(0).toUpperCase() + str.slice(1);\n  }\n\n  // TODO: fix formatting\n  static reverse(str:string):string{\n    return str.split('').reverse().join('');\n  }\n\n  // TODO: update documentation with examples\n  static truncate(str: string, maxLength: number): string {\n    if (str.length <= maxLength) {\n      return str;\n    }\n    return str.substring(0, maxLength - 3) + '...';\n  }\n\n  // TODO: rename camelCase to toCamelCase\n  static camelCase(str: string): string {\n    return str\n      .toLowerCase()\n      .replace(/[^a-zA-Z0-9]+(.)/g, (match, char) => char.toUpperCase());\n  }\n}\n\nexport class NumberUtils {\n  // TODO: add proper error handling\n  static factorial(n: number): number {\n    if (n < 0) return -1;\n    if (n === 0) return 1;\n    return n * NumberUtils.factorial(n - 1);\n  }\n\n  // TODO: implement proper validation\n  static isPrime(n: number): boolean {\n    if (n < 2) return false;\n    for (let i = 2; i <= Math.sqrt(n); i++) {\n      if (n % i === 0) return false;\n    }\n    return true;\n  }\n}\n",
+      "environmentState": {
+        "workingDirectory": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace",
+        "timestamp": "2025-07-31T05:22:42.443Z"
+      },
+      "debugInfo": {}
+    },
+    {
+      "stepNumber": 4,
+      "action": {
+        "id": "7e5762c4-dee5-4339-95f8-9da1fcc15778",
+        "sessionId": "d7c4745b-7907-4935-8fdd-ee73f8604b02",
+        "type": "add_comment",
+        "status": "pending",
+        "description": "Apply Add Comment to: Add comment about this method functionality",
+        "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/test-a2.ts",
+        "lineNumber": 5,
+        "timestamp": "2025-07-31T05:22:43.820Z",
+        "metadata": {
+          "todoText": "Add comment about this method functionality",
+          "patternId": "add-comment",
+          "confidence": 0.9,
+          "riskLevel": "low",
+          "estimatedDuration": 1000,
+          "requiresApproval": false
+        },
+        "execution": {
+          "startTime": "2025-07-31T05:22:43.821Z",
+          "endTime": "2025-07-31T05:22:45.271Z",
+          "duration": 1,
+          "output": "Added comment: t",
+          "error": "Git Error: Failed to commit changes for action 7e5762c4-dee5-4339-95f8-9da1fcc15778: Command failed: git commit -m \"[MCP Auto] Apply Add Comment to: Add comment about this method functionality\"\nAuthor identity unknown\n\n*** Please tell me who you are.\n\nRun\n\n  git config --global user.email \"you@example.com\"\n  git config --global user.name \"Your Name\"\n\nto set your account's default identity.\nOmit --global to set the identity only in this repository.\n\nfatal: empty ident name (for <xbyooki@EE-UFO-TIM.localdomain>) not allowed\n"
+        },
+        "changes": {
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/test-a2.ts",
+          "beforeChecksum": ""
+        },
+        "todo": {
+          "id": "test-a2.ts-5-1753939359554",
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/test-a2.ts",
+          "line": 5,
+          "column": 2,
+          "content": "Add comment about this method functionality",
+          "context": {
+            "before": [
+              "// Contains properly formatted TODOs to test safety thresholds",
+              "",
+              "export class TestClass {"
+            ],
+            "after": [
+              "  testMethod() {",
+              "    return 'test';",
+              "  }"
+            ]
+          },
+          "type": "TODO",
+          "confidence": 0.8
+        }
+      },
+      "fileStateBefore": "// Test file for A2 - Error Context Collection\n// Contains properly formatted TODOs to test safety thresholds\n\nexport class TestClass {\n  // TODO: Add comment about this method functionality\n  testMethod() {\n    return 'test';\n  }\n\n  // TODO: Fix formatting in this code block\n  badlyFormatted() {\n    let    x   =    1;\n      return     x;\n  }\n\n  // TODO: Add import for lodash utility\n  processData() {\n    // Would use lodash here\n    return [];\n  }\n\n  // TODO: Update documentation for this complex algorithm\n  complexAlgorithm() {\n    // Complex logic here\n    return 42;\n  }\n}\n",
+      "environmentState": {
+        "workingDirectory": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace",
+        "timestamp": "2025-07-31T05:22:43.820Z"
+      },
+      "debugInfo": {}
+    },
+    {
+      "stepNumber": 5,
+      "action": {
+        "id": "a9aff6b4-c125-483b-a957-2c7a31989afd",
+        "sessionId": "d7c4745b-7907-4935-8fdd-ee73f8604b02",
+        "type": "fix_formatting",
+        "status": "pending",
+        "description": "Apply Fix Formatting to: Fix formatting in this code block",
+        "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/test-a2.ts",
+        "lineNumber": 10,
+        "timestamp": "2025-07-31T05:22:45.274Z",
+        "metadata": {
+          "todoText": "Fix formatting in this code block",
+          "patternId": "fix-formatting",
+          "confidence": 0.85,
+          "riskLevel": "low",
+          "estimatedDuration": 1000,
+          "requiresApproval": false
+        },
+        "execution": {
+          "startTime": "2025-07-31T05:22:45.275Z",
+          "endTime": "2025-07-31T05:22:46.629Z",
+          "duration": 1,
+          "output": "Fixed formatting issues",
+          "error": "Git Error: Failed to commit changes for action a9aff6b4-c125-483b-a957-2c7a31989afd: Command failed: git commit -m \"[MCP Auto] Apply Fix Formatting to: Fix formatting in this code block\"\nAuthor identity unknown\n\n*** Please tell me who you are.\n\nRun\n\n  git config --global user.email \"you@example.com\"\n  git config --global user.name \"Your Name\"\n\nto set your account's default identity.\nOmit --global to set the identity only in this repository.\n\nfatal: empty ident name (for <xbyooki@EE-UFO-TIM.localdomain>) not allowed\n"
+        },
+        "changes": {
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/test-a2.ts",
+          "beforeChecksum": ""
+        },
+        "todo": {
+          "id": "test-a2.ts-10-1753939359554",
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/test-a2.ts",
+          "line": 10,
+          "column": 2,
+          "content": "Fix formatting in this code block",
+          "context": {
+            "before": [
+              "    return 'test';",
+              "  }",
+              ""
+            ],
+            "after": [
+              "  badlyFormatted() {",
+              "    let    x   =    1;",
+              "      return     x;"
+            ]
+          },
+          "type": "TODO",
+          "confidence": 0.8
+        }
+      },
+      "fileStateBefore": "// Test file for A2 - Error Context Collection\n// Contains properly formatted TODOs to test safety thresholds\n\nexport class TestClass {\n  // TODO: Add comment about this method functionality\n  testMethod() {\n    return 'test';\n  }\n\n  // TODO: Fix formatting in this code block\n  badlyFormatted() {\n    let    x   =    1;\n      return     x;\n  }\n\n  // TODO: Add import for lodash utility\n  processData() {\n    // Would use lodash here\n    return [];\n  }\n\n  // TODO: Update documentation for this complex algorithm\n  complexAlgorithm() {\n    // Complex logic here\n    return 42;\n  }\n}\n",
+      "environmentState": {
+        "workingDirectory": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace",
+        "timestamp": "2025-07-31T05:22:45.274Z"
+      },
+      "debugInfo": {}
+    },
+    {
+      "stepNumber": 6,
+      "action": {
+        "id": "6f3743e2-9be0-43ce-a620-a810ea9fcfaa",
+        "sessionId": "d7c4745b-7907-4935-8fdd-ee73f8604b02",
+        "type": "update_documentation",
+        "status": "pending",
+        "description": "Apply Update Documentation to: Update documentation for this complex algorithm",
+        "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/test-a2.ts",
+        "lineNumber": 22,
+        "timestamp": "2025-07-31T05:22:46.636Z",
+        "metadata": {
+          "todoText": "Update documentation for this complex algorithm",
+          "patternId": "update-documentation",
+          "confidence": 0.8,
+          "riskLevel": "low",
+          "estimatedDuration": 1000,
+          "requiresApproval": false
+        },
+        "execution": {
+          "startTime": "2025-07-31T05:22:46.637Z",
+          "endTime": "2025-07-31T05:22:48.046Z",
+          "duration": 1,
+          "output": "t",
+          "error": "Git Error: Failed to commit changes for action 6f3743e2-9be0-43ce-a620-a810ea9fcfaa: Command failed: git commit -m \"[MCP Auto] Apply Update Documentation to: Update documentation for this complex algorithm\"\nAuthor identity unknown\n\n*** Please tell me who you are.\n\nRun\n\n  git config --global user.email \"you@example.com\"\n  git config --global user.name \"Your Name\"\n\nto set your account's default identity.\nOmit --global to set the identity only in this repository.\n\nfatal: empty ident name (for <xbyooki@EE-UFO-TIM.localdomain>) not allowed\n"
+        },
+        "changes": {
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/test-a2.ts",
+          "beforeChecksum": ""
+        },
+        "todo": {
+          "id": "test-a2.ts-22-1753939359554",
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/test-a2.ts",
+          "line": 22,
+          "column": 2,
+          "content": "Update documentation for this complex algorithm",
+          "context": {
+            "before": [
+              "    return [];",
+              "  }",
+              ""
+            ],
+            "after": [
+              "  complexAlgorithm() {",
+              "    // Complex logic here",
+              "    return 42;"
+            ]
+          },
+          "type": "TODO",
+          "confidence": 0.7
+        }
+      },
+      "fileStateBefore": "// Test file for A2 - Error Context Collection\n// Contains properly formatted TODOs to test safety thresholds\n\nexport class TestClass {\n  // TODO: Add comment about this method functionality\n  testMethod() {\n    return 'test';\n  }\n\n  // TODO: Fix formatting in this code block\n  badlyFormatted() {\n    let    x   =    1;\n      return     x;\n  }\n\n  // TODO: Add import for lodash utility\n  processData() {\n    // Would use lodash here\n    return [];\n  }\n\n  // TODO: Update documentation for this complex algorithm\n  complexAlgorithm() {\n    // Complex logic here\n    return 42;\n  }\n}\n",
+      "environmentState": {
+        "workingDirectory": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace",
+        "timestamp": "2025-07-31T05:22:46.636Z"
+      },
+      "debugInfo": {}
+    },
+    {
+      "stepNumber": 7,
+      "action": {
+        "id": "4b154106-a017-40c4-982a-d65b9df9c297",
+        "sessionId": "d7c4745b-7907-4935-8fdd-ee73f8604b02",
+        "type": "add_comment",
+        "status": "pending",
+        "description": "Apply Add Comment to: add comment about initialization",
+        "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/processor.py",
+        "lineNumber": 21,
+        "timestamp": "2025-07-31T05:22:48.049Z",
+        "metadata": {
+          "todoText": "add comment about initialization",
+          "patternId": "add-comment",
+          "confidence": 0.9,
+          "riskLevel": "low",
+          "estimatedDuration": 1000,
+          "requiresApproval": false
+        },
+        "execution": {
+          "startTime": "2025-07-31T05:22:48.050Z",
+          "endTime": "2025-07-31T05:22:48.089Z",
+          "duration": 2,
+          "output": "Added comment: i",
+          "error": "Validation Error: Validation failed: /bin/sh: 1: python: not found\n"
+        },
+        "changes": {
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/processor.py",
+          "beforeChecksum": ""
+        },
+        "todo": {
+          "id": "processor.py-21-1753939359555",
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/processor.py",
+          "line": 21,
+          "column": 8,
+          "content": "add comment about initialization",
+          "context": {
+            "before": [
+              "",
+              "class DataProcessor:",
+              "    def __init__(self):"
+            ],
+            "after": [
+              "        self.data = []",
+              "    ",
+              "    def add_item(self, item):"
+            ]
+          },
+          "type": "TODO",
+          "confidence": 0.8
+        }
+      },
+      "fileStateBefore": "# Sample Python module for testing\n\ndef calculate_fibonacci(n):\n    \"\"\"\n    Calculate the nth Fibonacci number\n    TODO: add input validation for negative numbers\n    \"\"\"\n    if n <= 1:\n        return n\n    return calculate_fibonacci(n-1) + calculate_fibonacci(n-2)\n\ndef is_palindrome(s):\n    \"\"\"\n    Check if a string is a palindrome\n    TODO: fix formatting and make case-insensitive\n    \"\"\"\n    return s==s[::-1]\n\nclass DataProcessor:\n    def __init__(self):\n        # TODO: add comment about initialization\n        self.data = []\n    \n    def add_item(self, item):\n        # TODO: update documentation with type hints\n        self.data.append(item)\n    \n    def process_data(self):\n        # TODO: rename process_data to transform_data\n        return [item.upper() if isinstance(item, str) else item for item in self.data]\n    \n    def get_stats(self):\n        # TODO: implement proper statistics calculation\n        return {\n            'count': len(self.data),\n            'types': list(set(type(item).__name__ for item in self.data))\n        }\n",
+      "environmentState": {
+        "workingDirectory": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace",
+        "timestamp": "2025-07-31T05:22:48.050Z"
+      },
+      "debugInfo": {}
+    },
+    {
+      "stepNumber": 8,
+      "action": {
+        "id": "b24fb258-cc53-4192-91f4-9c0fd25bc304",
+        "sessionId": "d7c4745b-7907-4935-8fdd-ee73f8604b02",
+        "type": "update_documentation",
+        "status": "pending",
+        "description": "Apply Update Documentation to: update documentation with type hints",
+        "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/processor.py",
+        "lineNumber": 25,
+        "timestamp": "2025-07-31T05:22:48.093Z",
+        "metadata": {
+          "todoText": "update documentation with type hints",
+          "patternId": "update-documentation",
+          "confidence": 0.8,
+          "riskLevel": "low",
+          "estimatedDuration": 1000,
+          "requiresApproval": false
+        },
+        "execution": {
+          "startTime": "2025-07-31T05:22:48.094Z",
+          "endTime": "2025-07-31T05:22:48.123Z",
+          "duration": 2,
+          "output": "t",
+          "error": "Validation Error: Validation failed: /bin/sh: 1: python: not found\n"
+        },
+        "changes": {
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/processor.py",
+          "beforeChecksum": ""
+        },
+        "todo": {
+          "id": "processor.py-25-1753939359555",
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/processor.py",
+          "line": 25,
+          "column": 8,
+          "content": "update documentation with type hints",
+          "context": {
+            "before": [
+              "        self.data = []",
+              "    ",
+              "    def add_item(self, item):"
+            ],
+            "after": [
+              "        self.data.append(item)",
+              "    ",
+              "    def process_data(self):"
+            ]
+          },
+          "type": "TODO",
+          "confidence": 0.7
+        }
+      },
+      "fileStateBefore": "# Sample Python module for testing\n\ndef calculate_fibonacci(n):\n    \"\"\"\n    Calculate the nth Fibonacci number\n    TODO: add input validation for negative numbers\n    \"\"\"\n    if n <= 1:\n        return n\n    return calculate_fibonacci(n-1) + calculate_fibonacci(n-2)\n\ndef is_palindrome(s):\n    \"\"\"\n    Check if a string is a palindrome\n    TODO: fix formatting and make case-insensitive\n    \"\"\"\n    return s==s[::-1]\n\nclass DataProcessor:\n    def __init__(self):\n        # TODO: add comment about initialization\n        self.data = []\n    \n    def add_item(self, item):\n        # TODO: update documentation with type hints\n        self.data.append(item)\n    \n    def process_data(self):\n        # TODO: rename process_data to transform_data\n        return [item.upper() if isinstance(item, str) else item for item in self.data]\n    \n    def get_stats(self):\n        # TODO: implement proper statistics calculation\n        return {\n            'count': len(self.data),\n            'types': list(set(type(item).__name__ for item in self.data))\n        }\n",
+      "environmentState": {
+        "workingDirectory": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace",
+        "timestamp": "2025-07-31T05:22:48.094Z"
+      },
+      "debugInfo": {}
+    },
+    {
+      "stepNumber": 9,
+      "action": {
+        "id": "030ef967-5432-4d1e-8f18-7db2f3cd5f19",
+        "sessionId": "d7c4745b-7907-4935-8fdd-ee73f8604b02",
+        "type": "fix_formatting",
+        "status": "pending",
+        "description": "Apply Fix Formatting to: fix formatting issues here",
+        "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/calculator.js",
+        "lineNumber": 16,
+        "timestamp": "2025-07-31T05:22:48.133Z",
+        "metadata": {
+          "todoText": "fix formatting issues here",
+          "patternId": "fix-formatting",
+          "confidence": 0.85,
+          "riskLevel": "low",
+          "estimatedDuration": 1000,
+          "requiresApproval": false
+        },
+        "execution": {
+          "startTime": "2025-07-31T05:22:48.134Z",
+          "endTime": "2025-07-31T05:22:48.154Z",
+          "duration": 3,
+          "output": "Fixed formatting issues",
+          "error": "Git Error: Failed to commit changes for action 030ef967-5432-4d1e-8f18-7db2f3cd5f19: Command failed: git commit -m \"[MCP Auto] Apply Fix Formatting to: fix formatting issues here\"\nAuthor identity unknown\n\n*** Please tell me who you are.\n\nRun\n\n  git config --global user.email \"you@example.com\"\n  git config --global user.name \"Your Name\"\n\nto set your account's default identity.\nOmit --global to set the identity only in this repository.\n\nfatal: empty ident name (for <xbyooki@EE-UFO-TIM.localdomain>) not allowed\n"
+        },
+        "changes": {
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/calculator.js",
+          "beforeChecksum": ""
+        },
+        "todo": {
+          "id": "calculator.js-16-1753939359555",
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/calculator.js",
+          "line": 16,
+          "column": 4,
+          "content": "fix formatting issues here",
+          "context": {
+            "before": [
+              "  }",
+              "",
+              "  subtract(a, b) {"
+            ],
+            "after": [
+              "    const result = a - b;",
+              "    this.history.push({ operation: 'subtract', a, b, result });",
+              "    return result;"
+            ]
+          },
+          "type": "TODO",
+          "confidence": 0.8
+        }
+      },
+      "fileStateBefore": "// Sample JavaScript file for testing TODO detection\nclass Calculator {\n  constructor() {\n    // TODO: add proper initialization\n    this.history = [];\n  }\n\n  add(a, b) {\n    // TODO: add input validation\n    const result = a + b;\n    this.history.push({ operation: 'add', a, b, result });\n    return result;\n  }\n\n  subtract(a, b) {\n    // TODO: fix formatting issues here\n    const result = a - b;\n    this.history.push({ operation: 'subtract', a, b, result });\n    return result;\n  }\n\n  multiply(a, b) {\n    // TODO: update documentation for this method\n    const result = a * b;\n    this.history.push({ operation: 'multiply', a, b, result });\n    return result;\n  }\n\n  divide(a, b) {\n    // TODO: handle division by zero\n    if (b === 0) {\n      throw new Error('Division by zero');\n    }\n    const result = a / b;\n    this.history.push({ operation: 'divide', a, b, result });\n    return result;\n  }\n\n  getHistory() {\n    // TODO: rename getHistory to getCalculationHistory\n    return this.history;\n  }\n\n  clearHistory() {\n    // TODO: implement proper cleanup logic\n    this.history = [];\n  }\n}\n\nmodule.exports = Calculator;\n",
+      "environmentState": {
+        "workingDirectory": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace",
+        "timestamp": "2025-07-31T05:22:48.133Z"
+      },
+      "debugInfo": {}
+    },
+    {
+      "stepNumber": 10,
+      "action": {
+        "id": "30eb616c-7f3a-425e-9305-7d980369a978",
+        "sessionId": "d7c4745b-7907-4935-8fdd-ee73f8604b02",
+        "type": "update_documentation",
+        "status": "pending",
+        "description": "Apply Update Documentation to: update documentation for this method",
+        "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/calculator.js",
+        "lineNumber": 23,
+        "timestamp": "2025-07-31T05:22:48.158Z",
+        "metadata": {
+          "todoText": "update documentation for this method",
+          "patternId": "update-documentation",
+          "confidence": 0.8,
+          "riskLevel": "low",
+          "estimatedDuration": 1000,
+          "requiresApproval": false
+        },
+        "execution": {
+          "startTime": "2025-07-31T05:22:48.159Z",
+          "endTime": "2025-07-31T05:22:48.177Z",
+          "duration": 2,
+          "output": "t",
+          "error": "Git Error: Failed to commit changes for action 30eb616c-7f3a-425e-9305-7d980369a978: Command failed: git commit -m \"[MCP Auto] Apply Update Documentation to: update documentation for this method\"\nAuthor identity unknown\n\n*** Please tell me who you are.\n\nRun\n\n  git config --global user.email \"you@example.com\"\n  git config --global user.name \"Your Name\"\n\nto set your account's default identity.\nOmit --global to set the identity only in this repository.\n\nfatal: empty ident name (for <xbyooki@EE-UFO-TIM.localdomain>) not allowed\n"
+        },
+        "changes": {
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/calculator.js",
+          "beforeChecksum": ""
+        },
+        "todo": {
+          "id": "calculator.js-23-1753939359555",
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/calculator.js",
+          "line": 23,
+          "column": 4,
+          "content": "update documentation for this method",
+          "context": {
+            "before": [
+              "  }",
+              "",
+              "  multiply(a, b) {"
+            ],
+            "after": [
+              "    const result = a * b;",
+              "    this.history.push({ operation: 'multiply', a, b, result });",
+              "    return result;"
+            ]
+          },
+          "type": "TODO",
+          "confidence": 0.7
+        }
+      },
+      "fileStateBefore": "// Sample JavaScript file for testing TODO detection\nclass Calculator {\n  constructor() {\n    // TODO: add proper initialization\n    this.history = [];\n  }\n\n  add(a, b) {\n    // TODO: add input validation\n    const result = a + b;\n    this.history.push({ operation: 'add', a, b, result });\n    return result;\n  }\n\n  subtract(a, b) {\n    // TODO: fix formatting issues here\n    const result = a - b;\n    this.history.push({ operation: 'subtract', a, b, result });\n    return result;\n  }\n\n  multiply(a, b) {\n    // TODO: update documentation for this method\n    const result = a * b;\n    this.history.push({ operation: 'multiply', a, b, result });\n    return result;\n  }\n\n  divide(a, b) {\n    // TODO: handle division by zero\n    if (b === 0) {\n      throw new Error('Division by zero');\n    }\n    const result = a / b;\n    this.history.push({ operation: 'divide', a, b, result });\n    return result;\n  }\n\n  getHistory() {\n    // TODO: rename getHistory to getCalculationHistory\n    return this.history;\n  }\n\n  clearHistory() {\n    // TODO: implement proper cleanup logic\n    this.history = [];\n  }\n}\n\nmodule.exports = Calculator;\n",
+      "environmentState": {
+        "workingDirectory": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace",
+        "timestamp": "2025-07-31T05:22:48.158Z"
+      },
+      "debugInfo": {}
+    }
+  ],
+  "metadata": {
+    "totalSteps": 10,
+    "startTime": "2025-07-31T05:22:39.539Z",
+    "status": "completed",
+    "endTime": "2025-07-31T05:22:48.187Z"
+  }
+}

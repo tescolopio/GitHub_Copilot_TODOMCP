@@ -39,6 +39,7 @@
     "@types/uuid": "^10.0.0",
     "chokidar": "^3.5.3",
     "commander": "^11.1.0",
+    "find-up": "^5.0.0",
     "fs-extra": "^11.2.0",
     "glob": "^10.3.0",
     "semver": "^7.5.4",

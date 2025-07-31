@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import path from 'path';
-import glob from 'glob';
+import { glob } from 'glob';
 import { createLogger } from '../utils/logger';
 
 const logger = createLogger('FileSystemTools');
@@ -41,7 +41,7 @@ export class FileSystemTools {
       const todos: TodoItem[] = [];
       
       for (const pattern of filePatterns) {
-        const files = glob.sync(pattern, {
+        const files = await glob(pattern, {
           cwd: workspacePath,
           ignore: ['node_modules/**', 'dist/**', '.git/**'],
           absolute: true,
@@ -86,23 +86,14 @@ export class FileSystemTools {
         .slice(startLine, endLine)
         .map((lineContent, index) => {
           const lineNumber = startLine + index + 1;
-          const marker = lineNumber === line ? '>>> ' : '    ';
-          return `${marker}${String(lineNumber).padStart(4)}: ${lineContent}`;
-        })
-        .join('\n');
-
-      const result = `Context for ${path.basename(filePath)}:${line}\n` +
-        `${'='.repeat(50)}\n` +
-        contextContent + '\n' +
-        `${'='.repeat(50)}`;
+          return {
+            type: 'text' as const,
+            text: lineContent,
+          };
+        });
 
       return {
-        content: [
-          {
-            type: 'text',
-            text: result,
-          },
-        ],
+        content: contextContent,
       };
     } catch (error) {
       logger.error('Error reading file context:', error);

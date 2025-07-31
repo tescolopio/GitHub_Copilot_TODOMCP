@@ -3,6 +3,7 @@ import { exec } from 'child_process';
 import { promisify } from 'util';
 import path from 'path';
 import { createLogger } from '../utils/logger';
+import findUp from 'find-up';
 
 const execAsync = promisify(exec);
 const logger = createLogger('ValidationTools');
@@ -130,34 +131,54 @@ export class ValidationTools {
 
   private async validateTypeScript(filePath: string, content: string): Promise<SyntaxValidationResult> {
     try {
-      // Create a temporary file for validation
       const tempFile = path.join(path.dirname(filePath), `.temp-${Date.now()}.ts`);
       await fs.writeFile(tempFile, content);
+      
+      const tsconfigPath = await findUp('tsconfig.json', { cwd: path.dirname(filePath) });
 
       try {
-        // Use TypeScript compiler to check syntax
-        const { stderr } = await execAsync(`npx tsc --noEmit --skipLibCheck "${tempFile}"`);
-        
-        const errors = this.parseTypeScriptErrors(stderr);
+        const command = `npx tsc --noEmit --skipLibCheck ${tsconfigPath ? `--project "${tsconfigPath}"` : ''} "${tempFile}"`;
+        await execAsync(command);
         
         await fs.remove(tempFile);
         
         return {
-          isValid: errors.length === 0,
-          errors,
+          isValid: true,
+          errors: [],
         };
       } catch (execError: any) {
         await fs.remove(tempFile);
         
-        const errors = this.parseTypeScriptErrors(execError.stderr || '');
+        const stderr = execError.stderr || execError.stdout || '';
+        let errors = this.parseTypeScriptErrors(stderr);
+
+        if (errors.length === 0 && stderr.trim()) {
+          // If parsing returns no specific errors but there was output,
+          // treat the whole output as a single, general error.
+          errors.push({
+            line: 1,
+            column: 1,
+            message: stderr.trim(),
+            severity: 'error',
+          });
+        }
+
         return {
           isValid: false,
           errors,
         };
       }
-    } catch (error) {
+    } catch (error: any) {
       logger.warn('TypeScript validation failed:', error);
-      return { isValid: true, errors: [] }; // Fallback to assuming valid
+      return { 
+        isValid: false, 
+        errors: [{
+          line: 1,
+          column: 1,
+          message: error.message || 'An unknown validation error occurred.',
+          severity: 'error'
+        }] 
+      };
     }
   }
 
@@ -185,7 +206,8 @@ export class ValidationTools {
       await fs.writeFile(tempFile, content);
 
       try {
-        await execAsync(`python -m py_compile "${tempFile}"`);
+        const pythonExecutable = process.env.PYTHON_EXECUTABLE || 'python';
+        await execAsync(`${pythonExecutable} -m py_compile "${tempFile}"`);
         await fs.remove(tempFile);
         return { isValid: true, errors: [] };
       } catch (execError: any) {

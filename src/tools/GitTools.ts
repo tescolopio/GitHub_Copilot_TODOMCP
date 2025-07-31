@@ -58,7 +58,7 @@ export class GitTools {
 
       statusOutput.split('\n').forEach((line) => {
         if (!line) return;
-        
+
         const status = line.substring(0, 2);
         const file = line.substring(3);
 
@@ -186,18 +186,29 @@ export class GitTools {
       const { workspacePath, message, files } = args;
       logger.info(`Committing changes in ${workspacePath}`);
 
-      if (files && files.length > 0) {
-        // Add specific files
-        for (const file of files) {
-          await execAsync(`git add "${file}"`, { cwd: workspacePath });
-        }
-      } else {
-        // Add all changes
-        await execAsync('git add .', { cwd: workspacePath });
-      }
+      // Stage all changes, including new and deleted files. This is more reliable.
+      await execAsync('git add -A', { cwd: workspacePath });
 
-      // Commit the changes
-      await execAsync(`git commit -m "${message}"`, { cwd: workspacePath });
+      const commitCommand = `git commit -m "${message}"`;
+      try {
+        await execAsync(commitCommand, { cwd: workspacePath });
+      } catch (error: any) {
+        // It's normal for a commit to fail if there are no staged changes.
+        // We'll log this and continue, rather than treating it as a fatal error.
+        if (error.stdout && (error.stdout.includes('nothing to commit') || error.stdout.includes('no changes added to commit'))) {
+          logger.warn('Nothing to commit, skipping commit.');
+          return {
+            content: [
+              {
+                type: 'text',
+                text: '⚠️ Nothing to commit.',
+              },
+            ],
+          };
+        }
+        // For other errors, we'll re-throw to be handled upstream.
+        throw error;
+      }
 
       const result = `✅ Successfully committed changes\n` +
         `📝 Message: ${message}\n` +

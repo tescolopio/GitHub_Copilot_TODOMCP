@@ -12,6 +12,8 @@ import { ConfigManager } from './config/ConfigManager.js';
 import { FileSystemTools } from './tools/FileSystemTools.js';
 import { GitTools } from './tools/GitTools.js';
 import { ValidationTools } from './tools/ValidationTools.js';
+import { DebugTools } from './tools/DebugTools.js';
+import { AutoContinueService } from './services/AutoContinueService.js';
 
 const logger = createLogger('MCPServer');
 
@@ -20,6 +22,8 @@ interface ServerState {
   fileSystemTools: FileSystemTools;
   gitTools: GitTools;
   validationTools: ValidationTools;
+  debugTools: DebugTools;
+  autoContinueService?: AutoContinueService;
 }
 
 class MCPAutonomousDevServer {
@@ -43,8 +47,11 @@ class MCPAutonomousDevServer {
     this.state = {
       configManager: new ConfigManager(),
       fileSystemTools: new FileSystemTools(),
-      gitTools: new GitTools(),
+      gitTools: new GitTools(process.cwd()),
       validationTools: new ValidationTools(),
+      debugTools: new DebugTools({ 
+        replayService: null as any // Will be initialized later when AutoContinueService is created
+      }),
     };
 
     this.setupToolHandlers();
