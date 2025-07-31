@@ -1,6 +1,8 @@
 // Sample TypeScript utility functions
 export class StringUtils {
 t
+t
+t
   // TODO: add comment explaining this method
   static capitalize(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1);
