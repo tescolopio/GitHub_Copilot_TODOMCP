@@ -133,22 +133,22 @@ export class ValidationTools {
     try {
       const tempFile = path.join(path.dirname(filePath), `.temp-${Date.now()}.ts`);
       await fs.writeFile(tempFile, content);
-      
-      const tsconfigPath = await findUp('tsconfig.json', { cwd: path.dirname(filePath) });
 
       try {
-        const command = `npx tsc --noEmit --skipLibCheck ${tsconfigPath ? `--project "${tsconfigPath}"` : ''} "${tempFile}"`;
+        // tsc will automatically find the tsconfig.json if it exists in the path.
+        // By not using --project, we can pass a single file to be checked against that config.
+        const command = `npx tsc --noEmit --skipLibCheck "${tempFile}"`;
         await execAsync(command);
-        
+
         await fs.remove(tempFile);
-        
+
         return {
           isValid: true,
           errors: [],
         };
       } catch (execError: any) {
         await fs.remove(tempFile);
-        
+
         const stderr = execError.stderr || execError.stdout || '';
         let errors = this.parseTypeScriptErrors(stderr);
 
@@ -170,14 +170,14 @@ export class ValidationTools {
       }
     } catch (error: any) {
       logger.warn('TypeScript validation failed:', error);
-      return { 
-        isValid: false, 
+      return {
+        isValid: false,
         errors: [{
           line: 1,
           column: 1,
           message: error.message || 'An unknown validation error occurred.',
           severity: 'error'
-        }] 
+        }]
       };
     }
   }
