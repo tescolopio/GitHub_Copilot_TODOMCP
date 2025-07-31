@@ -261,10 +261,10 @@
           "requiresApproval": false
         },
         "execution": {
-          "startTime": "1970-01-01T00:00:00.000Z",
-          "endTime": "1970-01-01T00:00:00.000Z",
-          "duration": 0,
-          "output": "",
+          "startTime": "2025-07-31T07:07:04.851Z",
+          "endTime": "2025-07-31T07:07:04.853Z",
+          "duration": 2,
+          "output": "Fixed formatting issues",
           "error": ""
         },
         "changes": {
@@ -298,11 +298,71 @@
         "workingDirectory": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace",
         "timestamp": "2025-07-31T07:07:04.850Z"
       },
+      "debugInfo": {},
+      "fileStateAfter": "// Test file for A2 - Error Context Collection\n// Contains properly formatted TODOs to test safety thresholds\nexport class TestClass {\nt\n  // TODO: Add comment about this method functionality\n  testMethod() {\n    return 'test';\n  }\n  // TODO: Fix formatting in this code block\n  badlyFormatted() {\n    let    x   =    1;\n      return     x;\n  }\n  // TODO: Add import for lodash utility\n  processData() {\n    // Would use lodash here\n    return [];\n  }\n  // TODO: Update documentation for this complex algorithm\n  complexAlgorithm() {\n    // Complex logic here\n    return 42;\n  }\n}"
+    },
+    {
+      "stepNumber": 6,
+      "action": {
+        "id": "3981060c-8f18-44b6-bcf9-dc04cc435256",
+        "sessionId": "b436a9b8-67eb-4ac6-86c1-d3b29a5bffea",
+        "type": "update_documentation",
+        "status": "pending",
+        "description": "Apply Update Documentation to: Update documentation for this complex algorithm",
+        "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/test-a2.ts",
+        "lineNumber": 19,
+        "timestamp": "2025-07-31T07:07:16.261Z",
+        "metadata": {
+          "todoText": "Update documentation for this complex algorithm",
+          "patternId": "update-documentation",
+          "confidence": 0.8,
+          "riskLevel": "low",
+          "estimatedDuration": 1000,
+          "requiresApproval": false
+        },
+        "execution": {
+          "startTime": "1970-01-01T00:00:00.000Z",
+          "endTime": "1970-01-01T00:00:00.000Z",
+          "duration": 0,
+          "output": "",
+          "error": ""
+        },
+        "changes": {
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/test-a2.ts",
+          "beforeChecksum": ""
+        },
+        "todo": {
+          "id": "test-a2.ts-19-1753945582355",
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/test-a2.ts",
+          "line": 19,
+          "column": 2,
+          "content": "Update documentation for this complex algorithm",
+          "context": {
+            "before": [
+              "    // Would use lodash here",
+              "    return [];",
+              "  }"
+            ],
+            "after": [
+              "  complexAlgorithm() {",
+              "    // Complex logic here",
+              "    return 42;"
+            ]
+          },
+          "type": "TODO",
+          "confidence": 0.7
+        }
+      },
+      "fileStateBefore": "// Test file for A2 - Error Context Collection\n// Contains properly formatted TODOs to test safety thresholds\nexport class TestClass {\nt\n  // TODO: Add comment about this method functionality\n  testMethod() {\n    return 'test';\n  }\n  // TODO: Fix formatting in this code block\n  badlyFormatted() {\n    let    x   =    1;\n      return     x;\n  }\n  // TODO: Add import for lodash utility\n  processData() {\n    // Would use lodash here\n    return [];\n  }\n  // TODO: Update documentation for this complex algorithm\n  complexAlgorithm() {\n    // Complex logic here\n    return 42;\n  }\n}",
+      "environmentState": {
+        "workingDirectory": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace",
+        "timestamp": "2025-07-31T07:07:16.261Z"
+      },
       "debugInfo": {}
     }
   ],
   "metadata": {
-    "totalSteps": 5,
+    "totalSteps": 6,
     "startTime": "2025-07-31T07:06:22.339Z",
     "status": "recording"
   }
