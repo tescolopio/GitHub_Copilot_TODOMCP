@@ -81,10 +81,10 @@
           "requiresApproval": false
         },
         "execution": {
-          "startTime": "1970-01-01T00:00:00.000Z",
-          "endTime": "1970-01-01T00:00:00.000Z",
-          "duration": 0,
-          "output": "",
+          "startTime": "2025-07-31T07:06:33.855Z",
+          "endTime": "2025-07-31T07:06:33.857Z",
+          "duration": 2,
+          "output": "Fixed formatting issues",
           "error": ""
         },
         "changes": {
@@ -118,11 +118,71 @@
         "workingDirectory": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace",
         "timestamp": "2025-07-31T07:06:33.854Z"
       },
+      "debugInfo": {},
+      "fileStateAfter": "// Sample TypeScript utility functions\nexport class StringUtils {\nt\n  // TODO: add comment explaining this method\n  static capitalize(str: string): string {\n    return str.charAt(0).toUpperCase() + str.slice(1);\n  }\n  // TODO: fix formatting\n  static reverse(str:string):string{\n    return str.split('').reverse().join('');\n  }\n  // TODO: update documentation with examples\n  static truncate(str: string, maxLength: number): string {\n    if (str.length <= maxLength) {\n      return str;\n    }\n    return str.substring(0, maxLength - 3) + '...';\n  }\n  // TODO: rename camelCase to toCamelCase\n  static camelCase(str: string): string {\n    return str\n      .toLowerCase()\n      .replace(/[^a-zA-Z0-9]+(.)/g, (match, char) => char.toUpperCase());\n  }\n}\nexport class NumberUtils {\n  // TODO: add proper error handling\n  static factorial(n: number): number {\n    if (n < 0) return -1;\n    if (n === 0) return 1;\n    return n * NumberUtils.factorial(n - 1);\n  }\n  // TODO: implement proper validation\n  static isPrime(n: number): boolean {\n    if (n < 2) return false;\n    for (let i = 2; i <= Math.sqrt(n); i++) {\n      if (n % i === 0) return false;\n    }\n    return true;\n  }\n}"
+    },
+    {
+      "stepNumber": 3,
+      "action": {
+        "id": "c8040188-d0f2-4e4b-9617-744764e1a73c",
+        "sessionId": "b436a9b8-67eb-4ac6-86c1-d3b29a5bffea",
+        "type": "update_documentation",
+        "status": "pending",
+        "description": "Apply Update Documentation to: update documentation with examples",
+        "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/utils.ts",
+        "lineNumber": 12,
+        "timestamp": "2025-07-31T07:06:42.001Z",
+        "metadata": {
+          "todoText": "update documentation with examples",
+          "patternId": "update-documentation",
+          "confidence": 0.8,
+          "riskLevel": "low",
+          "estimatedDuration": 1000,
+          "requiresApproval": false
+        },
+        "execution": {
+          "startTime": "1970-01-01T00:00:00.000Z",
+          "endTime": "1970-01-01T00:00:00.000Z",
+          "duration": 0,
+          "output": "",
+          "error": ""
+        },
+        "changes": {
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/utils.ts",
+          "beforeChecksum": ""
+        },
+        "todo": {
+          "id": "utils.ts-12-1753945582355",
+          "filePath": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace/utils.ts",
+          "line": 12,
+          "column": 2,
+          "content": "update documentation with examples",
+          "context": {
+            "before": [
+              "  static reverse(str:string):string{",
+              "    return str.split('').reverse().join('');",
+              "  }"
+            ],
+            "after": [
+              "  static truncate(str: string, maxLength: number): string {",
+              "    if (str.length <= maxLength) {",
+              "      return str;"
+            ]
+          },
+          "type": "TODO",
+          "confidence": 0.7
+        }
+      },
+      "fileStateBefore": "// Sample TypeScript utility functions\nexport class StringUtils {\nt\n  // TODO: add comment explaining this method\n  static capitalize(str: string): string {\n    return str.charAt(0).toUpperCase() + str.slice(1);\n  }\n  // TODO: fix formatting\n  static reverse(str:string):string{\n    return str.split('').reverse().join('');\n  }\n  // TODO: update documentation with examples\n  static truncate(str: string, maxLength: number): string {\n    if (str.length <= maxLength) {\n      return str;\n    }\n    return str.substring(0, maxLength - 3) + '...';\n  }\n  // TODO: rename camelCase to toCamelCase\n  static camelCase(str: string): string {\n    return str\n      .toLowerCase()\n      .replace(/[^a-zA-Z0-9]+(.)/g, (match, char) => char.toUpperCase());\n  }\n}\nexport class NumberUtils {\n  // TODO: add proper error handling\n  static factorial(n: number): number {\n    if (n < 0) return -1;\n    if (n === 0) return 1;\n    return n * NumberUtils.factorial(n - 1);\n  }\n  // TODO: implement proper validation\n  static isPrime(n: number): boolean {\n    if (n < 2) return false;\n    for (let i = 2; i <= Math.sqrt(n); i++) {\n      if (n % i === 0) return false;\n    }\n    return true;\n  }\n}",
+      "environmentState": {
+        "workingDirectory": "/home/xbyooki/github_copilot_TODOMCP/sample-workspace",
+        "timestamp": "2025-07-31T07:06:42.001Z"
+      },
       "debugInfo": {}
     }
   ],
   "metadata": {
-    "totalSteps": 2,
+    "totalSteps": 3,
     "startTime": "2025-07-31T07:06:22.339Z",
     "status": "recording"
   }
